@@ -21,15 +21,16 @@ import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 import OutlinedFlagIcon from '@mui/icons-material/OutlinedFlag';
 import HelpOutlineOutlinedIcon from '@mui/icons-material/HelpOutlineOutlined';
 import SettingsBrightnessOutlinedIcon from '@mui/icons-material/SettingsBrightnessOutlined'
-import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';;
+import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
+
 // Styling...
 // Styled component for (div) for makeing the left side of youtube main menu list...
 const Container = styled.div`
     flex:1;
     position: sticky;
     top:0;
-    background-color: #202020;
-    color: white;
+    background-color: ${({theme})=> theme.LighterBackground};
+    color: ${({theme})=> theme.AllText};
     font-size: 14px;
     height: 100vh
 `;
@@ -76,7 +77,7 @@ const LoginButton = styled.button`
 `
 // Styled component (hr) for making breaks between main sections...
 const HorizontalLine = styled.hr`
-    border: solid 0.5px #373737;
+    border: solid 0.5px ${({theme})=> theme.SoftColor};
     margin: 10px 0px
 `
 // Styled component (div) for making topic - Best of Videos...
@@ -86,7 +87,7 @@ const BestVideos = styled.div`
 `
 
 // React functional component for Menu (left side component of the main page)
-export default function Menu() {
+export default function Menu({darkMode, setDarkMode}) {
     return (
         <Container>
             <WrapperContainer>
@@ -164,9 +165,9 @@ export default function Menu() {
                     <HelpOutlineOutlinedIcon />
                     Help
                 </Line>
-                <Line>
+                <Line onClick={()=>setDarkMode(!darkMode)}>
                     <SettingsBrightnessOutlinedIcon />
-                    Light Mode
+                    {darkMode? 'Light': 'Dark'} Mode
                 </Line>
             </WrapperContainer>
         </Container>
