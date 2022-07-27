@@ -45,7 +45,7 @@ const SearchContainer = styled.div`
 // Styled component for (input) for Search input...
 const SearchInput = styled.input`
     border: none;
-    background: transpatent;
+    background: transparent;
     outline: none;
 `
 // styled componenet (button) for login button... 
