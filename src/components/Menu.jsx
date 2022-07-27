@@ -58,7 +58,7 @@ const Line = styled.div`
     align-items: center;
     gap: 20px;
     margin-top: 10px
-`
+`;
 // Styled component (div) for login page (JWT)...
 const StyledLogin = styled.div``
 // styled componenet (button) for login button... 
@@ -74,17 +74,17 @@ const LoginButton = styled.button`
     gap:4px;
     display: flex;
     align-items: center   
-`
+`;
 // Styled component (hr) for making breaks between main sections...
 const HorizontalLine = styled.hr`
     border: solid 0.5px ${({theme})=> theme.SoftColor};
     margin: 10px 0px
-`
+`;
 // Styled component (div) for making topic - Best of Videos...
 const BestVideos = styled.div`
     color: gray;
     font-weight: bold;
-`
+`;
 
 // React functional component for Menu (left side component of the main page)
 export default function Menu({darkMode, setDarkMode}) {
