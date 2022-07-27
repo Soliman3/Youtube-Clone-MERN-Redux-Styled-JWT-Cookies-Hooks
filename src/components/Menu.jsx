@@ -2,7 +2,7 @@ import React from 'react';
 // import styled components library for styling our app...
 import styled from 'styled-components';
 
-// import images from image folder...
+// import LogoImage from images folder...
 import logoImage from '../images/youtubeLogo.png';
 
 // Imported material icons from mui5 library...
@@ -26,7 +26,7 @@ import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined
 // Styling...
 // Styled component for (div) for makeing the left side of youtube main menu list...
 const Container = styled.div`
-    flex:1;
+    flex:1.30;
     position: sticky;
     top:0;
     background-color: ${({theme})=> theme.LighterBackground};
@@ -42,7 +42,7 @@ const WrapperContainer = styled.div`
 // Styled component for (div) contained youtube icon & displed clone name...
 const Logo = styled.div`
     display:flex;
-    gap:5px;
+    gap:6px;
     align-items: center;
     font-weight: bold;
 `;

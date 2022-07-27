@@ -27,7 +27,9 @@ const Container = styled.div`
   margin: 0px;
 `
 // Styled component for (div) to wrapping Container...
-const WrapContainer = styled.div``
+const WrapContainer = styled.div`
+  padding: 28px 28px;
+`
 
 // React functional component for App as the main body of the application...
 function App() {
