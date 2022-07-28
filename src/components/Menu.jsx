@@ -23,14 +23,17 @@ import HelpOutlineOutlinedIcon from '@mui/icons-material/HelpOutlineOutlined';
 import SettingsBrightnessOutlinedIcon from '@mui/icons-material/SettingsBrightnessOutlined'
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 
+// import Link to direct clicking on logo to home page route ('/')...
+import { Link } from 'react-router-dom';
+
 // Styling...
 // Styled component for (div) for makeing the left side of youtube main menu list...
 const Container = styled.div`
     flex:1.30;
     position: sticky;
     top:0;
-    background-color: ${({theme})=> theme.LighterBackground};
-    color: ${({theme})=> theme.AllText};
+    background-color: ${({ theme }) => theme.LighterBackground};
+    color: ${({ theme }) => theme.AllText};
     font-size: 14px;
     height: 100vh
 `;
@@ -45,6 +48,7 @@ const Logo = styled.div`
     gap:6px;
     align-items: center;
     font-weight: bold;
+    cursor: pointer;
 `;
 
 // Styled component (img) for the youtube icon...
@@ -77,7 +81,7 @@ const LoginButton = styled.button`
 `;
 // Styled component (hr) for making breaks between main sections...
 const HorizontalLine = styled.hr`
-    border: solid 0.5px ${({theme})=> theme.SoftColor};
+    border: solid 0.5px ${({ theme }) => theme.SoftColor};
     margin: 10px 0px
 `;
 // Styled component (div) for making topic - Best of Videos...
@@ -87,14 +91,16 @@ const BestVideos = styled.div`
 `;
 
 // React functional component for Menu (left side component of the main page)
-export default function Menu({darkMode, setDarkMode}) {
+export default function Menu({ darkMode, setDarkMode }) {
     return (
         <Container>
             <WrapperContainer>
-                <Logo>
-                    <YoutubeLogo src={logoImage} />
-                    Soliman
-                </Logo>
+                <Link to="/" style={{color: 'inherit', textDecoration: 'none'}}>
+                    <Logo>
+                        <YoutubeLogo src={logoImage} />
+                        Soliman
+                    </Logo>
+                </Link>
                 <Line>
                     <HomeIcon />
                     Home
@@ -165,9 +171,9 @@ export default function Menu({darkMode, setDarkMode}) {
                     <HelpOutlineOutlinedIcon />
                     Help
                 </Line>
-                <Line onClick={()=>setDarkMode(!darkMode)}>
+                <Line onClick={() => setDarkMode(!darkMode)}>
                     <SettingsBrightnessOutlinedIcon />
-                    {darkMode? 'Light': 'Dark'} Mode
+                    {darkMode ? 'Light' : 'Dark'} Mode
                 </Line>
             </WrapperContainer>
         </Container>

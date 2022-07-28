@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 // import styled components library for styling our app...
 import styled from 'styled-components';
@@ -43,7 +44,7 @@ const VideoText = styled.div``
 const VideoName = styled.h1`
     font-weight: 500;
     font-size: 16px;
-    color: ${({theme})=> theme.Alltext};
+    color: ${({ theme }) => theme.Alltext};
 `
 // Styled component for (h2) for Channel Name...
 const AccountName = styled.h2`
@@ -62,16 +63,18 @@ const VideoInfo = styled.div`
 // React functional component for Video Cards...
 export default function VideoCard() {
     return (
-        <Container>
-            <VideoImage src={videoCardImage} />
-            <VideoDetails>
-                <AccountImage src={videoCardImage} />
-                <VideoText>
-                    <VideoName>Youtube Clone MERN Stack</VideoName>
-                    <AccountName>Code js</AccountName>
-                    <VideoInfo>302,042 views • 10 days ago</VideoInfo>
-                </VideoText>
-            </VideoDetails>
-        </Container>
+        <Link to="/video/123" style={{color: 'inherit', textDecoration: 'inherit'}}>
+            <Container>
+                <VideoImage src={videoCardImage} />
+                <VideoDetails>
+                    <AccountImage src={videoCardImage} />
+                    <VideoText>
+                        <VideoName style={({theme})=> theme.Alltext}>Youtube Clone MERN Stack</VideoName>
+                        <AccountName>Code js</AccountName>
+                        <VideoInfo>302,042 views • 10 days ago</VideoInfo>
+                    </VideoText>
+                </VideoDetails>
+            </Container>
+        </Link>
     )
 }

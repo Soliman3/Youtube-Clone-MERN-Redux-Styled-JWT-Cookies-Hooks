@@ -62,7 +62,7 @@ const LoginButton = styled.button`
     align-items: center   
 `;
 
-// React functional component for NavBar
+// React functional component for NavBar...
 export default function NavBar() {
   return (
     <Container>
