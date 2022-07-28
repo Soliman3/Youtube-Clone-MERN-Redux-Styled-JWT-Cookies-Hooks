@@ -3,7 +3,8 @@ export const darkTheme = {
     LighterBackground: '#202020',
     AllText: 'white',
     SoftText: '#aaaaaa',
-    SoftColor: '#373737'
+    SoftColor: '#373737',
+    Lines: '#373737'
 }
 
 export const lightTheme = {
@@ -11,5 +12,6 @@ export const lightTheme = {
     LighterBackground: 'white',
     AllText: 'black',
     SoftText: '#606060',
-    SoftColor: '#f5f5f5'
+    SoftColor: '#f5f5f5',
+    Lines: '#e3e3e8'
 }

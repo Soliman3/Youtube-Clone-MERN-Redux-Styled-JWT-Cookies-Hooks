@@ -81,8 +81,11 @@ const LoginButton = styled.button`
 `;
 // Styled component (hr) for making breaks between main sections...
 const HorizontalLine = styled.hr`
-    border: solid 0.5px ${({ theme }) => theme.SoftColor};
-    margin: 10px 0px
+    border: solid  0 ;
+    background-color:${({ theme }) => theme.Lines};
+    height: 0.5px;
+    margin: 10px 0px;
+    
 `;
 // Styled component (div) for making topic - Best of Videos...
 const BestVideos = styled.div`
