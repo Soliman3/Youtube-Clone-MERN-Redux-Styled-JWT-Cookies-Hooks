@@ -13,11 +13,13 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 
 // import ChannelImage from images folder...
 import ChannelImage from '../images/AccountImage.jpg';
+// import Comments component...
+import Comments from '../components/Comments';
 
 // Styling...
 const Container = styled.div`
   display: flex;
-  gap:24px
+  gap:15px
 `
 const VideoContent = styled.div`
   flex: 5;
@@ -75,7 +77,7 @@ const VideoChannelInfo = styled.div`
 const SubscribeButton = styled.button`
   color: white;
   font-size: 14px;
-  background-color: #d62004;
+  background-color: #CC0000;
   border: none;
   height: max-content;
   cursor: pointer;
@@ -172,6 +174,8 @@ export default function Video() {
           </VideoChannelInfo>
           <SubscribeButton>SUBSCRIBE</SubscribeButton>
         </VideoChannel>
+        <HorizontalLine />
+        <Comments />
       </VideoContent>
       <Recommendations>
         Recommendations component
