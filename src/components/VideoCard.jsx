@@ -6,6 +6,8 @@ import styled from 'styled-components';
 
 // import videoVardImage from images folder...
 import videoCardImage from '../images/videoCard.jpg'
+// import ChannelImage from images folder...
+import ChannelImage from '../images/AccountImage.jpg';
 
 
 // Styling...
@@ -67,10 +69,10 @@ export default function VideoCard() {
             <Container>
                 <VideoImage src={videoCardImage} />
                 <VideoDetails>
-                    <AccountImage src={videoCardImage} />
+                    <AccountImage src={ChannelImage} />
                     <VideoText>
                         <VideoName style={({theme})=> theme.Alltext}>Youtube Clone MERN Stack</VideoName>
-                        <AccountName>Code js</AccountName>
+                        <AccountName>K'eyush The Stunt Dog</AccountName>
                         <VideoInfo>302,042 views • 10 days ago</VideoInfo>
                     </VideoText>
                 </VideoDetails>
