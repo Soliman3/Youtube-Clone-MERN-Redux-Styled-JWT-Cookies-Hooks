@@ -15,6 +15,7 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import ChannelImage from '../images/AccountImage.jpg';
 // import Comments component...
 import Comments from '../components/Comments';
+import VideoCard from '../components/VideoCard';
 
 // Styling...
 const Container = styled.div`
@@ -178,7 +179,21 @@ export default function Video() {
         <Comments />
       </VideoContent>
       <Recommendations>
-        Recommendations component
+        <VideoCard type='sm'/>
+        <VideoCard type='sm'/>
+        <VideoCard type='sm' />
+        <VideoCard type='sm'/>
+        <VideoCard type='sm'/>
+        <VideoCard type='sm'/>
+        <VideoCard type='sm'/>
+        <VideoCard type='sm' />
+        <VideoCard type='sm' />
+        <VideoCard type='sm' />
+        <VideoCard type='sm' />
+        <VideoCard type='sm' />
+        <VideoCard type='sm' />
+        <VideoCard type='sm' />
+        <VideoCard type='sm' />
       </Recommendations>
     </Container>
   )

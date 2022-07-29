@@ -68,7 +68,7 @@ const Container = styled.div`
 
 // Styled component for (div) to wrap the main content of the container and giving it a padding...
 const WrapperContainer = styled.div`
-    padding: 18px 26px; 
+    
 `;
 
 // Styled component for (div) contained youtube icon & displed clone name...
@@ -78,6 +78,7 @@ const Logo = styled.div`
     align-items: center;
     font-weight: bold;
     cursor: pointer;
+    padding:8px 26px; 
 `;
 
 // Styled component (img) for the youtube icon...
@@ -87,13 +88,20 @@ const YoutubeLogo = styled.img`
 // Styled component (div) for each item as row displaying...
 const Line = styled.div`
     cursor: pointer;
+    padding:8px 26px;
+    width: 100%;
     display: flex;
     align-items: center;
     gap: 20px;
-    margin-top: 10px
+    margin-top: 10px;
+    &:hover{
+        background-color: ${({theme})=> theme.SoftColor};
+    };
+    
 `;
 // Styled component (div) for login page (JWT)...
-const StyledLogin = styled.div``
+const StyledLogin = styled.div`
+    padding:8px 26px;`
 // styled componenet (button) for login button... 
 const LoginButton = styled.button`
     font-weight: 500;
@@ -120,6 +128,7 @@ const HorizontalLine = styled.hr`
 const BestVideos = styled.div`
     color: gray;
     font-weight: bold;
+    padding:10px 26px; 
 `;
 
 // React functional component for Menu (left side component of the main page)
