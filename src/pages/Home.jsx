@@ -35,6 +35,26 @@ export default function Home() {
             <VideoCard />
             <VideoCard />
             <VideoCard />
+            <VideoCard />
+            <VideoCard />
+            <VideoCard />
+            <VideoCard />
+            <VideoCard />
+            <VideoCard />
+            <VideoCard />
+            <VideoCard />
+            <VideoCard />
+            <VideoCard />
+            <VideoCard />
+            <VideoCard />
+            <VideoCard />
+            <VideoCard />
+            <VideoCard />
+            <VideoCard />
+            <VideoCard />
+            <VideoCard />
+            <VideoCard />
+
 
         </Container>
     )

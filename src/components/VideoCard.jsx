@@ -16,6 +16,7 @@ const Container = styled.div`
     width: 294px;
     cursor: pointer;
     margin-bottom: 45px;
+    
 
 `
 // Styled component for (img) for makeing Video Image...

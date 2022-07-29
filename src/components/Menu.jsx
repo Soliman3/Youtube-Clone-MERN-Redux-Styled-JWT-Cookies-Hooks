@@ -1,7 +1,6 @@
 import React from 'react';
 // import styled components library for styling our app...
 import styled from 'styled-components';
-
 // import LogoImage from images folder...
 import logoImage from '../images/youtubeLogo.png';
 
@@ -30,16 +29,46 @@ import { Link } from 'react-router-dom';
 // Styled component for (div) for makeing the left side of youtube main menu list...
 const Container = styled.div`
     flex:1.30;
-    position: sticky;
-    top:0;
     background-color: ${({ theme }) => theme.LighterBackground};
     color: ${({ theme }) => theme.AllText};
     font-size: 14px;
-    height: 100vh
+    height: 100vh;
+    top: 0px;
+    bottom:0px;
+    right: 0; 
+    left: 0;
+    position:sticky;
+    overflow-y:scroll;
+    overflow-x:hidden;
+    z-index: 2;
+    ::-webkit-scrollbar {
+        width: 8px;
+        height: 5px;
+        
+        
+      }
+    
+      ::-webkit-scrollbar-corner {
+        height: 0;
+      }
+    
+      ::-webkit-scrollbar-track {
+        background-color: transparent;
+        border-radius: 25px;
+      }
+    
+      ::-webkit-scrollbar-thumb {
+        background-color: gray;
+        border-radius: 25px;
+        &:hover {
+            background-color: ${({theme})=> theme.SoftText};
+          }
+      }
 `;
+
 // Styled component for (div) to wrap the main content of the container and giving it a padding...
 const WrapperContainer = styled.div`
-    padding: 18px 26px;
+    padding: 18px 26px; 
 `;
 
 // Styled component for (div) contained youtube icon & displed clone name...

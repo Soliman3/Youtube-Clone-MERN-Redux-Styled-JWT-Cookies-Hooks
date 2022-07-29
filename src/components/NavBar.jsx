@@ -12,9 +12,11 @@ import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 // Styled component for (div) for makeing the NavBar component...
 const Container = styled.div`
     height: 55px;
-    position: sticky;
+    position: fixed;
     top: 0;
-    background-color: ${({theme})=> theme.LighterBackground};
+    background-color: ${({ theme }) => theme.LighterBackground};
+    width: 100%;
+    z-index: 3;
 `;
 
 // Styled component for (div) to wrap the main content of the container and giving it a padding...
@@ -24,12 +26,12 @@ const WrapperContainer = styled.div`
     height: 100%;
     padding: 0 25px;
     justify-content: flex-end;
-    position: relative
+    position: relative;
 `;
 
 // Styled component for (div) for Search container...
 const SearchContainer = styled.div`
-    position: absolute;
+    position: sticky;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -63,7 +65,7 @@ const LoginButton = styled.button`
 `;
 
 // React functional component for NavBar...
-export default function NavBar() {
+export default function TestNavBar() {
   return (
     <Container>
       <WrapperContainer>
