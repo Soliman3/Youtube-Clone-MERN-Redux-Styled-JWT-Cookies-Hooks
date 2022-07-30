@@ -1,12 +1,11 @@
 import React from 'react';
 // import styled components library for styling our app...
 import styled from 'styled-components';
-// import LogoImage from images folder...
-import logoImage from '../images/youtubeLogo.png';
+
+// import Link to direct clicking on logo to home page route ('/')..
+import { Link } from 'react-router-dom';
 
 // Imported material icons from mui5 library...
-import HomeIcon from '@mui/icons-material/Home';
-import ExploreOutlinedIcon from '@mui/icons-material/ExploreOutlined';
 import SubscriptionsOutlinedIcon from '@mui/icons-material/SubscriptionsOutlined';
 import VideoLibraryOutlinedIcon from '@mui/icons-material/VideoLibraryOutlined';
 import HistoryOutlinedIcon from '@mui/icons-material/HistoryOutlined';
@@ -19,11 +18,11 @@ import LiveTvOutlinedIcon from '@mui/icons-material/LiveTvOutlined';
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 import OutlinedFlagIcon from '@mui/icons-material/OutlinedFlag';
 import HelpOutlineOutlinedIcon from '@mui/icons-material/HelpOutlineOutlined';
-import SettingsBrightnessOutlinedIcon from '@mui/icons-material/SettingsBrightnessOutlined'
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 
-// import Link to direct clicking on logo to home page route ('/')...
-import { Link } from 'react-router-dom';
+// import Designed icons from images folder...
+import explore from '../images/explore.svg';
+import home from '../images/home.svg';
 
 // Styling...
 // Styled component for (div) for makeing the left side of youtube main menu list...
@@ -38,53 +37,43 @@ const Container = styled.div`
     right: 0; 
     left: 0;
     position:sticky;
-    overflow-y:scroll;
+    overflow-y:hidden;
     overflow-x:hidden;
     z-index: 2;
+    &:hover{
+        overflow-y:scroll;
+    };
+    
+    }
     ::-webkit-scrollbar {
         width: 8px;
         height: 5px;
         
         
-      }
-    
-      ::-webkit-scrollbar-corner {
-        height: 0;
-      }
-    
-      ::-webkit-scrollbar-track {
-        background-color: transparent;
-        border-radius: 25px;
-      }
-    
-      ::-webkit-scrollbar-thumb {
-        background-color: gray;
-        border-radius: 25px;
-        &:hover {
-            background-color: ${({theme})=> theme.SoftText};
-          }
-      }
+    }
+
+    ::-webkit-scrollbar-corner {
+    height: 0;
+    }
+
+    ::-webkit-scrollbar-track {
+    background-color: transparent;
+    border-radius: 25px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+    background-color: gray;
+    border-radius: 25px;
+    &:hover {
+        background-color: ${({ theme }) => theme.SoftText};
+        
+        }
+    }
 `;
 
 // Styled component for (div) to wrap the main content of the container and giving it a padding...
-const WrapperContainer = styled.div`
-    
-`;
 
-// Styled component for (div) contained youtube icon & displed clone name...
-const Logo = styled.div`
-    display:flex;
-    gap:6px;
-    align-items: center;
-    font-weight: bold;
-    cursor: pointer;
-    padding:8px 26px; 
-`;
 
-// Styled component (img) for the youtube icon...
-const YoutubeLogo = styled.img`
-    height: 27px;
-`;
 // Styled component (div) for each item as row displaying...
 const Line = styled.div`
     cursor: pointer;
@@ -93,11 +82,10 @@ const Line = styled.div`
     display: flex;
     align-items: center;
     gap: 20px;
-    margin-top: 10px;
-    &:hover{
-        background-color: ${({theme})=> theme.SoftColor};
-    };
     
+    &:hover{
+        background-color: ${({ theme }) => theme.SoftColor};
+    };
 `;
 // Styled component (div) for login page (JWT)...
 const StyledLogin = styled.div`
@@ -131,23 +119,25 @@ const BestVideos = styled.div`
     padding:10px 26px; 
 `;
 
+// Styled component (img) for the  icons...
+const DesignedIcons = styled.img`
+    height: 19px;
+    padding-bottom: 4px;
+    padding-left:2px;
+`;
+
 // React functional component for Menu (left side component of the main page)
-export default function Menu({ darkMode, setDarkMode }) {
+export default function Menu() {
     return (
         <Container>
-            <WrapperContainer>
-                <Link to="/" style={{color: 'inherit', textDecoration: 'none'}}>
-                    <Logo>
-                        <YoutubeLogo src={logoImage} />
-                        Soliman
-                    </Logo>
+                <Link to="/" style={{ color: 'inherit', textDecoration: 'inherit' }}>
+                    <Line>
+                        <DesignedIcons src={home} />
+                        Home
+                    </Line>
                 </Link>
                 <Line>
-                    <HomeIcon />
-                    Home
-                </Line>
-                <Line>
-                    <ExploreOutlinedIcon />
+                    <DesignedIcons src={explore} />
                     Explore
                 </Line>
                 <Line>
@@ -212,11 +202,6 @@ export default function Menu({ darkMode, setDarkMode }) {
                     <HelpOutlineOutlinedIcon />
                     Help
                 </Line>
-                <Line onClick={() => setDarkMode(!darkMode)}>
-                    <SettingsBrightnessOutlinedIcon />
-                    {darkMode ? 'Light' : 'Dark'} Mode
-                </Line>
-            </WrapperContainer>
         </Container>
     )
 }

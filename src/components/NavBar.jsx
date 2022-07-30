@@ -7,6 +7,12 @@ import styled from 'styled-components';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 
+// import Link to direct clicking on logo to home page route ('/')...
+import { Link } from 'react-router-dom';
+
+// import LogoImage from images folder...
+import logoImage from '../images/youtubeLogo.svg';
+import MenuIcon from '../images/MenuIcon.png';
 
 // Styling...
 // Styled component for (div) for makeing the NavBar component...
@@ -27,6 +33,32 @@ const WrapperContainer = styled.div`
     padding: 0 25px;
     justify-content: flex-end;
     position: relative;
+`;
+const LogoContainer = styled.div`
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    
+`;
+
+// Styled component for (div) contained youtube icon & displed clone name...
+const Logo = styled.div`
+    gap:6px;
+    align-items: center;
+    font-weight: bold;
+    cursor: pointer;
+`;
+
+// Styled component (img) for the youtube icon...
+const YoutubeLogo = styled.img`
+    height: 24.5px;
+    margin-left:27.75px;
+`;
+// Styled component (img) for the youtube icon...
+const MainMenu = styled.img`
+    height: 13.75px;
+    margin-left: 1px;
+    cursor: pointer;
 `;
 
 // Styled component for (div) for Search container...
@@ -65,12 +97,20 @@ const LoginButton = styled.button`
 `;
 
 // React functional component for NavBar...
-export default function TestNavBar() {
+export default function TestNavBar({MenuClicked, setMenuClicked}) {
   return (
     <Container>
       <WrapperContainer>
+        <LogoContainer />
+        <MainMenu src={MenuIcon} onClick={()=> setMenuClicked(!MenuClicked)} />
+        <Link to="/" style={{color: 'inherit', textDecoration: 'none'}}>
+                    <Logo>
+                        <YoutubeLogo src={logoImage} />
+                    </Logo>
+                </Link>
+        <LogoContainer />
         <SearchContainer>
-          <SearchInput placeholder='Search'/>
+          <SearchInput placeholder='Search' />
           <SearchOutlinedIcon />
         </SearchContainer>
         <LoginButton>

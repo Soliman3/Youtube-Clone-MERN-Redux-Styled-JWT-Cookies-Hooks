@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useLayoutEffect } from 'react';
 // import styled components library for styling our app...
 import styled from 'styled-components';
 
@@ -118,6 +118,9 @@ const VideoDiscription = styled.p`
   font-size: 14px;
 `
 export default function Video() {
+  useLayoutEffect(() => {
+    window.scrollTo(0, 0)
+  });
   return (
     <Container>
       <VideoContent>
@@ -179,13 +182,13 @@ export default function Video() {
         <Comments />
       </VideoContent>
       <Recommendations>
-        <VideoCard type='sm'/>
-        <VideoCard type='sm'/>
         <VideoCard type='sm' />
-        <VideoCard type='sm'/>
-        <VideoCard type='sm'/>
-        <VideoCard type='sm'/>
-        <VideoCard type='sm'/>
+        <VideoCard type='sm' />
+        <VideoCard type='sm' />
+        <VideoCard type='sm' />
+        <VideoCard type='sm' />
+        <VideoCard type='sm' />
+        <VideoCard type='sm' />
         <VideoCard type='sm' />
         <VideoCard type='sm' />
         <VideoCard type='sm' />

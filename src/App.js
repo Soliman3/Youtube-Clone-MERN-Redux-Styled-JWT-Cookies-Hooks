@@ -10,9 +10,10 @@ import Menu from "./components/Menu";
 import NavBar from "./components/NavBar";
 import Home from "./pages/Home";
 import Video from "./pages/Video";
+import MiniMenu from "./components/MiniMenu";
 
 // import Global theme...
-import { darkTheme, lightTheme } from "./Theme";
+import { lightTheme } from "./Theme";
 import GlobalStyles from "./Global";
 // Styling...
 const MasterContainer = styled.div`
@@ -21,9 +22,10 @@ const MasterContainer = styled.div`
 `
 // Styled component for Main (div)...
 const Main = styled.div`
-  flex: 7;
-  background-color: ${({theme})=> theme.hardBackground};
-  color: ${({theme})=> theme.AllText}
+  flex:${(props)=> props.type === 'sm'? '7.9': '7'};
+  background-color: ${({ theme }) => theme.hardBackground};
+  color: ${({ theme }) => theme.AllText};
+  margin-left: 0;
 `
 // Styled Component for (div) to styling main Container inside Main...
 const Container = styled.div`
@@ -40,30 +42,32 @@ const WrapContainer = styled.div`
 
 // React functional component for App as the main body of the application...
 function App() {
-  const [darkMode, setDarkMode] = useState(true);
+
+  const [MenuClicked, setMenuClicked] = useState(false);
+
   return (
-    <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
+    <ThemeProvider theme={lightTheme}>
       <MasterContainer>
-      <NavBar/>
-      <Container>
         <BrowserRouter>
-        
-        <Menu darkMode={darkMode} setDarkMode={setDarkMode} />
-        <Main>
-        <GlobalStyles/>
-          <WrapContainer>
-            <Routes>
-              <Route path="/">
-                <Route index element={<Home/>}/>
-                <Route path="video">
-                  <Route path=":id" element={<Video/>}/>
-                </Route>
-              </Route>
-            </Routes>
-          </WrapContainer>
-        </Main>
+          <NavBar MenuClicked={MenuClicked} setMenuClicked={setMenuClicked}/>
+          <Container>
+            {MenuClicked ? <MiniMenu/> : <Menu/>}
+            
+            <Main>
+              <GlobalStyles />
+              <WrapContainer>
+                <Routes>
+                  <Route path="/">
+                    <Route index element={<Home/>} />
+                    <Route path="video">
+                      <Route path=":id" element={<Video />} />
+                    </Route>
+                  </Route>
+                </Routes>
+              </WrapContainer>
+            </Main>
+          </Container>
         </BrowserRouter>
-      </Container>
       </MasterContainer>
     </ThemeProvider>
   );

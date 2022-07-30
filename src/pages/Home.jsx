@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useLayoutEffect } from 'react';
 
 import styled from "styled-components";
 
@@ -11,7 +11,10 @@ const Container = styled.div`
 `
 
 export default function Home() {
-    return (
+    useLayoutEffect(() => {
+        window.scrollTo(0, 0)
+    });
+    return (    
         <Container>
             <VideoCard />
             <VideoCard />

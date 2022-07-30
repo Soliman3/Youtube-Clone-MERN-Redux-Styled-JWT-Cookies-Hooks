@@ -13,7 +13,7 @@ import ChannelImage from '../images/AccountImage.jpg';
 // Styling...
 // Styled component for (div) for makeing Main Container of Video Card...
 const Container = styled.div`
-    width: ${(props) => props.type === 'sm' ? '100%': '294px'};
+    max-width: 100%;
     cursor: pointer;
     gap: 12px;
     margin-bottom: ${(props)=> props.type === 'sm'? '10px': '45px'};
@@ -23,7 +23,7 @@ const Container = styled.div`
 `
 // Styled component for (img) for makeing Video Image...
 const VideoImage = styled.img`
-    width: 100%;
+max-width: 100%;
     height:${(props)=> props.type === 'sm' ? '100px': '167px'};
     background: gray;
     object-fit: cover;
@@ -73,7 +73,7 @@ const VideoInfo = styled.div`
 export default function VideoCard({type}) {
     return (
         <Link to="/video/123" style={{color: 'inherit', textDecoration: 'inherit'}}>
-            <Container type={type}>
+            <Container type={type} >
                 <VideoImage src={videoCardImage} type={type}/>
                 <VideoDetails type={type}>
                     <AccountImage src={ChannelImage} type={type}/>
