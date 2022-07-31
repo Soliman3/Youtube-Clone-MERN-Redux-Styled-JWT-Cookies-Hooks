@@ -6,9 +6,6 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 // Imported material icons from mui5 library...
-import SubscriptionsOutlinedIcon from '@mui/icons-material/SubscriptionsOutlined';
-import VideoLibraryOutlinedIcon from '@mui/icons-material/VideoLibraryOutlined';
-import HistoryOutlinedIcon from '@mui/icons-material/HistoryOutlined';
 import LibraryMusicOutlinedIcon from '@mui/icons-material/LibraryMusicOutlined';
 import SportsBasketballOutlinedIcon from '@mui/icons-material/SportsBasketballOutlined';
 import SportsEsportsOutlinedIcon from '@mui/icons-material/SportsEsportsOutlined';
@@ -23,6 +20,9 @@ import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined
 // import Designed icons from images folder...
 import explore from '../images/explore.svg';
 import home from '../images/home.svg';
+import subscription from '../images/subscription.svg';
+import library from '../images/library.svg';
+import history from '../images/history.svg';
 
 // Styling...
 // Styled component for (div) for makeing the left side of youtube main menu list...
@@ -75,7 +75,7 @@ const Container = styled.div`
 // Styled component (div) for each item as row displaying...
 const Line = styled.div`
     cursor: pointer;
-    padding:8px 26px;
+    padding:12px 26px;
     width: 100%;
     display: flex;
     align-items: center;
@@ -139,16 +139,16 @@ export default function Menu() {
                 Explore
             </Line>
             <Line>
-                <SubscriptionsOutlinedIcon />
+                <DesignedIcons src={subscription} />
                 Subscriptions
             </Line>
             <HorizontalLine />
             <Line>
-                <VideoLibraryOutlinedIcon />
+                <DesignedIcons src={library} />
                 Library
             </Line>
             <Line>
-                <HistoryOutlinedIcon />
+                <DesignedIcons src={history} />
                 History
             </Line>
             <HorizontalLine />

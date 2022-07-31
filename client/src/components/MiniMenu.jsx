@@ -5,14 +5,12 @@ import styled from 'styled-components';
 // import Link to direct clicking on logo to home page route ('/')...
 import { Link } from 'react-router-dom';
 
-// Imported material icons from mui5 library...
-import SubscriptionsOutlinedIcon from '@mui/icons-material/SubscriptionsOutlined';
-import VideoLibraryOutlinedIcon from '@mui/icons-material/VideoLibraryOutlined';
-
 // import Designed icons from images folder...
 import shorts from '../images/shorts.svg';
 import explore from '../images/explore.svg';
 import home from '../images/home.svg';
+import subscription from '../images/subscription.svg';
+import library from '../images/library.svg';
 
 // Styling...
 // Styled component for (div) for makeing the left side of youtube main menu list...
@@ -74,11 +72,11 @@ export default function MainiMenu() {
                     Shorts
                 </Line>
                 <Line>
-                    <SubscriptionsOutlinedIcon />
+                <DesignedIcons src={subscription} />
                     Subscriptions
                 </Line>
                 <Line>
-                    <VideoLibraryOutlinedIcon />
+                <DesignedIcons src={library} />
                     Library
                 </Line>
             
