@@ -32,10 +32,8 @@ const Container = styled.div`
     color: ${({ theme }) => theme.AllText};
     font-size: 14px;
     height: 100vh;
-    top: 0px;
-    bottom:0px;
-    right: 0; 
-    left: 0;
+    top: 55px;
+    
     position:sticky;
     overflow-y:hidden;
     overflow-x:hidden;
@@ -60,7 +58,7 @@ const Container = styled.div`
     background-color: transparent;
     border-radius: 25px;
     }
-
+    
     ::-webkit-scrollbar-thumb {
     background-color: gray;
     border-radius: 25px;
@@ -126,82 +124,85 @@ const DesignedIcons = styled.img`
     padding-left:2px;
 `;
 
-// React functional component for Menu (left side component of the main page)
+// React functional component for Menu (left side component of the main page)...
 export default function Menu() {
     return (
         <Container>
-                <Link to="/" style={{ color: 'inherit', textDecoration: 'inherit' }}>
-                    <Line>
-                        <DesignedIcons src={home} />
-                        Home
-                    </Line>
-                </Link>
+            <Link to="/" style={{ color: 'inherit', textDecoration: 'inherit' }}>
                 <Line>
-                    <DesignedIcons src={explore} />
-                    Explore
+                    <DesignedIcons src={home} />
+                    Home
                 </Line>
-                <Line>
-                    <SubscriptionsOutlinedIcon />
-                    Subscriptions
-                </Line>
-                <HorizontalLine />
-                <Line>
-                    <VideoLibraryOutlinedIcon />
-                    Library
-                </Line>
-                <Line>
-                    <HistoryOutlinedIcon />
-                    History
-                </Line>
-                <HorizontalLine />
-                <StyledLogin>
-                    Sign in to like videos, comment and subscribe
+            </Link>
+            <Line>
+                <DesignedIcons src={explore} />
+                Explore
+            </Line>
+            <Line>
+                <SubscriptionsOutlinedIcon />
+                Subscriptions
+            </Line>
+            <HorizontalLine />
+            <Line>
+                <VideoLibraryOutlinedIcon />
+                Library
+            </Line>
+            <Line>
+                <HistoryOutlinedIcon />
+                History
+            </Line>
+            <HorizontalLine />
+            <StyledLogin>
+                Sign in to like videos, comment and subscribe
+                <Link to="signin" style={{ color: 'inherit', textDecoration: 'inherit' }}>
                     <LoginButton>
                         <AccountCircleOutlinedIcon />
                         SIGN IN
                     </LoginButton>
-                </StyledLogin>
-                <HorizontalLine />
-                <BestVideos>
-                    BEST OF VIDEOS
-                </BestVideos>
-                <Line>
-                    <LibraryMusicOutlinedIcon />
-                    Music
-                </Line>
-                <Line>
-                    <SportsBasketballOutlinedIcon />
-                    Sports
-                </Line>
-                <Line>
-                    <SportsEsportsOutlinedIcon />
-                    Gaming
-                </Line>
-                <Line>
-                    <MovieOutlinedIcon />
-                    Movie
-                </Line>
-                <Line>
-                    <ArticleOutlinedIcon />
-                    News
-                </Line>
-                <Line>
-                    <LiveTvOutlinedIcon />
-                    Live
-                </Line>
-                <HorizontalLine />
-                <Line>
-                    <SettingsOutlinedIcon />
-                    Settings
-                </Line>
-                <Line>
-                    <OutlinedFlagIcon />
-                    Report
-                </Line>
-                <Line>
-                    <HelpOutlineOutlinedIcon />
-                    Help
-                </Line>
+                </Link>
+
+            </StyledLogin>
+            <HorizontalLine />
+            <BestVideos>
+                BEST OF VIDEOS
+            </BestVideos>
+            <Line>
+                <LibraryMusicOutlinedIcon />
+                Music
+            </Line>
+            <Line>
+                <SportsBasketballOutlinedIcon />
+                Sports
+            </Line>
+            <Line>
+                <SportsEsportsOutlinedIcon />
+                Gaming
+            </Line>
+            <Line>
+                <MovieOutlinedIcon />
+                Movie
+            </Line>
+            <Line>
+                <ArticleOutlinedIcon />
+                News
+            </Line>
+            <Line>
+                <LiveTvOutlinedIcon />
+                Live
+            </Line>
+            <HorizontalLine />
+            <Line>
+                <SettingsOutlinedIcon />
+                Settings
+            </Line>
+            <Line>
+                <OutlinedFlagIcon />
+                Report
+            </Line>
+            <Line>
+                <HelpOutlineOutlinedIcon />
+                Help
+            </Line>
         </Container>
     )
 }

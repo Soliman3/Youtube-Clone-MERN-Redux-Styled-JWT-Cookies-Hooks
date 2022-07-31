@@ -13,30 +13,34 @@ import Video from "./pages/Video";
 import MiniMenu from "./components/MiniMenu";
 
 // import Global theme...
-import { lightTheme } from "./Theme";
-import GlobalStyles from "./Global";
+import { lightTheme } from "./utiles/Theme";
+import GlobalStyles from "./utiles/Global";
+import Login from "./pages/Login";
 // Styling...
-const MasterContainer = styled.div`
-  display: flex;
-  margin-top:55px  
-`
+
 // Styled component for Main (div)...
 const Main = styled.div`
   flex:${(props)=> props.type === 'sm'? '7.9': '7'};
   background-color: ${({ theme }) => theme.hardBackground};
   color: ${({ theme }) => theme.AllText};
   margin-left: 0;
+  margin-top: 55px;
+ 
+  
 `
 // Styled Component for (div) to styling main Container inside Main...
 const Container = styled.div`
   display:flex;
   flex-direction: row;
-  bottom:0px;
+  
+
+  
 
 `
 // Styled component for (div) to wrapping Container...
 const WrapContainer = styled.div`
   padding: 28px 28px;
+
  
 `
 
@@ -47,9 +51,9 @@ function App() {
 
   return (
     <ThemeProvider theme={lightTheme}>
-      <MasterContainer>
+    
         <BrowserRouter>
-          <NavBar MenuClicked={MenuClicked} setMenuClicked={setMenuClicked}/>
+          <NavBar MenuClicked={MenuClicked} setMenuClicked={setMenuClicked} />
           <Container>
             {MenuClicked ? <MiniMenu/> : <Menu/>}
             
@@ -58,7 +62,8 @@ function App() {
               <WrapContainer>
                 <Routes>
                   <Route path="/">
-                    <Route index element={<Home/>} />
+                    <Route index element={<Home />} />
+                    <Route path="signin" element={<Login/>}/>
                     <Route path="video">
                       <Route path=":id" element={<Video />} />
                     </Route>
@@ -68,7 +73,7 @@ function App() {
             </Main>
           </Container>
         </BrowserRouter>
-      </MasterContainer>
+  
     </ThemeProvider>
   );
 }

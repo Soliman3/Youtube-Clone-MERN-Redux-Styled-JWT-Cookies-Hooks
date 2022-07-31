@@ -23,6 +23,7 @@ const Container = styled.div`
     background-color: ${({ theme }) => theme.LighterBackground};
     width: 100%;
     z-index: 3;
+    
 `;
 
 // Styled component for (div) to wrap the main content of the container and giving it a padding...
@@ -32,7 +33,7 @@ const WrapperContainer = styled.div`
     height: 100%;
     padding: 0 25px;
     justify-content: flex-end;
-    position: relative;
+   
 `;
 const LogoContainer = styled.div`
     cursor: pointer;
@@ -93,31 +94,32 @@ const LoginButton = styled.button`
     padding: 5px 20px;
     gap:4px;
     display: flex;
-    align-items: center   
+    align-items: center;  
 `;
 
 // React functional component for NavBar...
-export default function TestNavBar({MenuClicked, setMenuClicked}) {
+export default function TestNavBar({ MenuClicked, setMenuClicked }) {
   return (
     <Container>
       <WrapperContainer>
         <LogoContainer />
-        <MainMenu src={MenuIcon} onClick={()=> setMenuClicked(!MenuClicked)} />
-        <Link to="/" style={{color: 'inherit', textDecoration: 'none'}}>
-                    <Logo>
-                        <YoutubeLogo src={logoImage} />
-                    </Logo>
-                </Link>
+        <MainMenu src={MenuIcon} onClick={() => setMenuClicked(!MenuClicked)} />
+        <Link to="/" style={{ color: 'inherit', textDecoration: 'none' }}>
+          <Logo>
+            <YoutubeLogo src={logoImage} />
+          </Logo>
+        </Link>
         <LogoContainer />
         <SearchContainer>
           <SearchInput placeholder='Search' />
           <SearchOutlinedIcon />
         </SearchContainer>
-        <LoginButton>
-          <AccountCircleOutlinedIcon />
-          SIGN IN
-        </LoginButton>
-
+        <Link to="signin" style={{ color: 'inherit', textDecoration: 'inherit' }}>
+          <LoginButton>
+            <AccountCircleOutlinedIcon />
+            SIGN IN
+          </LoginButton>
+        </Link>
       </WrapperContainer>
     </Container>
   )
