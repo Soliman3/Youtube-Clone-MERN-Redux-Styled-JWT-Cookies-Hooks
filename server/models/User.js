@@ -14,7 +14,7 @@ const UserSchema = new mongoose.Schema({
         unique: true,
     },
     password: {
-        type: Number,
+        type: String,
         required: true,
     },
     img: {
@@ -25,7 +25,7 @@ const UserSchema = new mongoose.Schema({
         default: 0,
     },
     subscribedChannels: {
-        type: [Sting],
+        type: [String],
     },
 },
     { timestamps: true }

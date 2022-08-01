@@ -7,6 +7,8 @@ import dotenv from 'dotenv';
 import userRoutes from './routes/usersRoute.js';
 import commentRoutes from './routes/commentsRoute.js';
 import videoRoutes from './routes/videosRoute.js';
+import authRoutes from './routes/authenticationRoute.js';
+import cookieParser from 'cookie-parser';
 
 const app = express() // caching express library in variable "app"...
 dotenv.config()  // to configuring dotenv
@@ -19,13 +21,24 @@ const CONNECTION = () => {
         }).catch((error) => { throw error })
 };
 
+// allowing receiving json data...
+app.use(express.json());  
+
+// using cookie parser...
+app.use(cookieParser())
 
 // use Routes...
 app.use('/api/users', userRoutes);
 app.use('/api/comments', commentRoutes);
 app.use('/api/videos', videoRoutes);
+app.use('/api/auth', authRoutes);
 
-
+// middleware for hanndling errors...
+app.use((error, req, res, next)=> {
+    const status = error.status || 500;
+    const message = error.message || 'something wrong of the entry';
+    return res.status(status).json({success: false , status: status, message: message})
+})
 // listening to server on PORT 5000 and connect to database with function CONNECTION...
 app.listen(5000, () => {
     CONNECTION()
