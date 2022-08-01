@@ -1,9 +1,12 @@
 import express from 'express';
-// impoet Mongoose library to deal with mongoDB...
+// import Mongoose library to deal with mongoDB...
 import mongoose from 'mongoose';
 //import dotenv library for securety of my credentials...
 import dotenv from 'dotenv';
-
+//import Routes...
+import userRoutes from './routes/usersRoute.js';
+import commentRoutes from './routes/commentsRoute.js';
+import videoRoutes from './routes/videosRoute.js';
 
 const app = express() // caching express library in variable "app"...
 dotenv.config()  // to configuring dotenv
@@ -12,9 +15,16 @@ dotenv.config()  // to configuring dotenv
 const CONNECTION = () => {
     mongoose.connect(process.env.MONGO)
         .then(() => {
-        console.log("connected to database")
-    }).catch((error)=>{throw error})
-}
+            console.log("connected to database")
+        }).catch((error) => { throw error })
+};
+
+
+// use Routes...
+app.use('/api/users', userRoutes);
+app.use('/api/comments', commentRoutes);
+app.use('/api/videos', videoRoutes);
+
 
 // listening to server on PORT 5000 and connect to database with function CONNECTION...
 app.listen(5000, () => {
