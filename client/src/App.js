@@ -11,11 +11,11 @@ import NavBar from "./components/NavBar";
 import Home from "./pages/Home";
 import Video from "./pages/Video";
 import MiniMenu from "./components/MiniMenu";
+import Login from "./pages/Login";
 
 // import Global theme...
 import { lightTheme } from "./utiles/Theme";
 import GlobalStyles from "./utiles/Global";
-import Login from "./pages/Login";
 // Styling...
 
 // Styled component for Main (div)...
