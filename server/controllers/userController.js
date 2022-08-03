@@ -1,6 +1,7 @@
 import { createError } from "../error.js";
 // import User Schema from models...
 import User from "../models/User.js";
+import Video from "../models/Video.js";
 
 
 
@@ -99,10 +100,35 @@ export const unsubscribe = async (req, res, next) => {
 
 // like a specific channel
 export const like = async (req, res, next) => {
+    // caching signed in user id to store in likes array in the Video Schema...
+    const likeUserId = req.user.id;
+    // caching videoId that comes from requested params...
+    const videoId = req.params.videoId;
+    try {
+        // find video by video id > then add signed in userId in the like array only onetime > then remove userId from dislikes array...
+        await Video.findByIdAndUpdate(videoId, { $addToSet: { likes: likeUserId }, $pull: { dislikes: likeUserId } });
+        // and if success send json response with success message...
+        res.status(200).json("video has been liked")
+    } catch (error) {
+        // if fails send error...
 
+        next(error)
+    }
 };
 
 // dislike specific channel
 export const dislike = async (req, res, next) => {
-    
+    // caching signed in user id to store in dislikes array in the Video Schema...
+    const dislikeUserId = req.user.id;
+    // caching videoId that comes from requested params...
+    const videoId = req.params.videoId;
+    try {
+        // find video by video id > then add signed in userId in the dislike array only onetime > then remove userId from likes array...
+        await Video.findByIdAndUpdate(videoId, { $addToSet: { dislikes: dislikeUserId }, $pull: { likes: dislikeUserId } });
+        // and if success send json response with success message...
+        res.status(200).json("video has been disliked")
+    } catch (error) {
+        // if fails send error...
+        next(error)
+    }
 };
