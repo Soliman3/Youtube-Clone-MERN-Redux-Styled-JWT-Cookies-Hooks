@@ -13,7 +13,8 @@ export const update = async (req, res, next) => {
             // find user by id and set new value in request body and show the updated user...
             const updatedUser = await User.findByIdAndUpdate(req.params.id, {
                 $set: req.body
-            }, { new: true })
+            }, { new: true });
+
             // if success send json response by the updatedUser...
             res.status(200).json(updatedUser);
         } catch (error) {
@@ -32,6 +33,7 @@ export const deleteUser = async (req, res, next) => {
         try {
             // find user by id and delete it...
             await User.findByIdAndDelete(req.params.id,);
+
             // if success send json response with success message...
             res.status(200).json("User has been deleted");
         } catch (error) {
@@ -51,7 +53,7 @@ export const getUser =async (req, res, next) => {
         // get user by id...
         const user = await User.findById(req.params.id)
         // exclude password in json return...
-        const { password, ...other } = user._doc
+        const { password, ...other } = user._doc;
         res.status(200).json(other)
     } catch (error) {
         // if fails send error...
@@ -70,6 +72,7 @@ export const subscribe = async (req, res, next) => {
             await User.findByIdAndUpdate(req.params.id, {
                 $inc: { subscribers: 1 },
             });
+
             // and if success send json response with success message...
             res.status(200).json("subscription done")
     } catch (error) {

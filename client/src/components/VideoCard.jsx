@@ -1,19 +1,19 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 // import styled components library for styling our app...
 import styled from 'styled-components';
 
-// import videoVardImage from images folder...
-import videoCardImage from '../images/videoCard.jpg'
 // import ChannelImage from images folder...
-import ChannelImage from '../images/AccountImage.jpg';
+// import ChannelImage from '../images/AccountImage.jpg';
+import moment from 'moment';
+import axios from 'axios';
 
 
 // Styling...
 // Styled component for (div) for makeing Main Container of Video Card...
 const Container = styled.div`
-    max-width: 100%;
+    width: 294px;
     cursor: pointer;
     gap: 12px;
     margin-bottom: ${(props)=> props.type === 'sm'? '10px': '45px'};
@@ -23,7 +23,7 @@ const Container = styled.div`
 `
 // Styled component for (img) for makeing Video Image...
 const VideoImage = styled.img`
-max-width: 100%;
+    width: 100%;
     height:${(props)=> props.type === 'sm' ? '100px': '167px'};
     background: gray;
     object-fit: cover;
@@ -70,17 +70,27 @@ const VideoInfo = styled.div`
     font-weight: 400;
 `
 // React functional component for Video Cards...
-export default function VideoCard({type}) {
+export default function VideoCard({ type, video }) {
+    const [channel, setChannel] = useState({});
+    useEffect(() => {
+        const fetchChannelData = async () => {
+            const response = await axios.get(`/users/find/${video.userId}`)
+            setChannel(response.data)
+        };
+        fetchChannelData();
+    }, [video.userId]);
+
+
     return (
         <Link to="/video/123" style={{color: 'inherit', textDecoration: 'inherit'}}>
             <Container type={type} >
-                <VideoImage src={videoCardImage} type={type}/>
+                <VideoImage src={video.imgUrl} type={type}/>
                 <VideoDetails type={type}>
-                    <AccountImage src={ChannelImage} type={type}/>
+                    <AccountImage src={channel.img} type={type}/>
                     <VideoText>
-                        <VideoName style={({theme})=> theme.Alltext} type={type}>Youtube Clone MERN Stack</VideoName>
-                        <AccountName>K'eyush The Stunt Dog</AccountName>
-                        <VideoInfo>302,042 views • 10 days ago</VideoInfo>
+                        <VideoName style={({ theme }) => theme.Alltext} type={type}>{video.title}</VideoName>
+                        <AccountName>{channel.name}</AccountName>
+                        <VideoInfo>{video.views} views • {moment(video.createdAt).fromNow()}</VideoInfo>
                     </VideoText>
                 </VideoDetails>
             </Container>

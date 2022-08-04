@@ -15,7 +15,7 @@ export const signup = async (req, res, next) => {
         const hash = bcrypt.hashSync(req.body.password, salt);
         // adding newUser with hashed password in User model...
         const newUser = new User({...req.body, password: hash});
-        await newUser.save();
+         await newUser.save();
         // response message in success...
         res.status(200).send('New user created..');
    } catch (error) {
@@ -38,9 +38,9 @@ export const signin = async (req, res, next) => {
         const token = jwt.sign({ id: user._id }, process.env.JWT)
         // exclude password from response in cookie...
         const { password, ...other } = user._doc
-        
         // response by user data without password...
-        res.cookie("access_token", token, { httpOnly: true }).status(200).json(other)
+         res.cookie("access_token", token, { httpOnly: true }).status(200).json(other);
+         
         
         
    } catch (error) {

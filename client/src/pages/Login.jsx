@@ -3,6 +3,7 @@ import SignUp from '../components/SignUp';
 
 // import styled components library for styling our app...
 import styled from 'styled-components';
+import axios from 'axios';
 
 
 // Styling by Styled Component Library...
@@ -83,7 +84,19 @@ color: #5B8AC7;
 
 // React functional component for Login Page...
 export default function SignIn() {
-
+    const [name, setName] = useState("");
+    const [password, setPassword] = useState("");
+ 
+    const handleSignIn = async (e) => {
+        e.preventDefault()
+        try {
+            const response = await axios.post("/auth/signin", { name, password })
+         console.log(response.data);
+        } catch (error) {
+            
+        }
+         
+    }
     // useState to toggle between Sign In & and Sign Up forms...
     const [register, setRegister] = useState(false);
 
@@ -96,10 +109,12 @@ export default function SignIn() {
             {register ? <SignUp setRegister={setRegister} /> : <><WrapperContainer>
                 <Title>Sign In</Title>
                 <SubTitle>to continue to Video Clone</SubTitle>
-                <Input placeholder='User_Name' />
-                <Input placeholder='Password' type='password' />
+                <form>
+                <Input placeholder='User_Name' onChange={(e)=>setName(e.target.value)}/>
+                <Input placeholder='Password' type='password' onChange={(e)=>setPassword(e.target.value)}/>
+                </form>
                 <WrapperButton>
-                    <Button >Sign In</Button>
+                    <Button onClick={handleSignIn}>Sign In</Button>
                     <SignUpMessage onClick={() => setRegister(true)}>Create new account</SignUpMessage>
                 </WrapperButton>
 

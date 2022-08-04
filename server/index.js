@@ -9,6 +9,7 @@ import commentRoutes from './routes/commentsRoute.js';
 import videoRoutes from './routes/videosRoute.js';
 import authRoutes from './routes/authenticationRoute.js';
 import cookieParser from 'cookie-parser';
+import cors from "cors"; // for handling cross origin requests
 
 const app = express() // caching express library in variable "app"...
 dotenv.config()  // to configuring dotenv
@@ -21,18 +22,19 @@ const CONNECTION = () => {
         }).catch((error) => { throw error })
 };
 
+app.use(cors());
 // allowing receiving json data...
 app.use(express.json());  
 
 // using cookie parser...
 app.use(cookieParser())
-
 // use Routes...
 app.use('/api/users', userRoutes);
 app.use('/api/comments', commentRoutes);
 app.use('/api/videos', videoRoutes);
 app.use('/api/auth', authRoutes);
 
+   
 // middleware for hanndling errors...
 app.use((error, req, res, next)=> {
     const status = error.status || 500;

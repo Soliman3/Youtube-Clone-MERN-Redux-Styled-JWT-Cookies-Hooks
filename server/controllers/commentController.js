@@ -29,6 +29,7 @@ export const deleteComment = async (req, res, next) => {
         if (req.user.id === comment.userId || req.user.id === video.userId) {
             // if true, find the Comment by requested id and delete...
             await Comment.findByIdAndDelete(req.params.id);
+
             // if success > send success messge as response json...
             res.status(200).json("Comment deleted")
         } else {

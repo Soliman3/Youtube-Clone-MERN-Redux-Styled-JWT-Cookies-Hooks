@@ -26,6 +26,7 @@ export const updateVideo = async (req, res, next) => {
         if (!searchedVideo) return next(createError(403, "Video not found"));
         if (req.user.id === searchedVideo.userId) {
             const updatedVideo = await Video.findByIdAndUpdate(req.params.id, { $set: req.body }, { new: true });
+
             // And send constant as json response...
             res.status(200).json(updatedVideo);
         } else { return next(createError(403, " Warning!! you can't update other videos")) }
@@ -132,7 +133,7 @@ export const searchVideos = async (req, res, next) => {
     const search = req.query.q 
 
     try {
-        const videos = await Video.find({ title: { $regex: search, $options: 'i' } }).limit(35)
+        const videos = await Video.find({ title: { $regex: search, $options: 'i' } }).limit(35);
         // if success send constant as json response...
         res.status(200).json(videos)    
     } catch (error) {

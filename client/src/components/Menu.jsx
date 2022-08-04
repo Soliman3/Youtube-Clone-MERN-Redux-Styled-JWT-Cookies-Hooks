@@ -134,14 +134,18 @@ export default function Menu() {
                     Home
                 </Line>
             </Link>
-            <Line>
-                <DesignedIcons src={explore} />
-                Explore
-            </Line>
-            <Line>
-                <DesignedIcons src={subscription} />
-                Subscriptions
-            </Line>
+            <Link to="trends" style={{ color: 'inherit', textDecoration: 'inherit' }}>
+                <Line>
+                    <DesignedIcons src={explore} />
+                    Explore
+                </Line>
+            </Link>
+            <Link to="subscriptions" style={{ color: 'inherit', textDecoration: 'inherit' }}>
+                <Line>
+                    <DesignedIcons src={subscription} />
+                    Subscriptions
+                </Line>
+            </Link>
             <HorizontalLine />
             <Line>
                 <DesignedIcons src={library} />
