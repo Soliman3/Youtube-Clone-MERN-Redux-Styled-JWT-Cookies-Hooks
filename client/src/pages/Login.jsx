@@ -1,9 +1,11 @@
 import React, { useLayoutEffect, useState } from 'react';
 import SignUp from '../components/SignUp';
+import { useDispatch } from 'react-redux';
 
 // import styled components library for styling our app...
 import styled from 'styled-components';
 import axios from 'axios';
+import { loginFailure, loginStart, loginSuccess } from '../redux/useSlice';
 
 
 // Styling by Styled Component Library...
@@ -86,14 +88,16 @@ color: #5B8AC7;
 export default function SignIn() {
     const [name, setName] = useState("");
     const [password, setPassword] = useState("");
+    const dispatch = useDispatch()
  
     const handleSignIn = async (e) => {
         e.preventDefault()
+        dispatch(loginStart())
         try {
             const response = await axios.post("/auth/signin", { name, password })
-         console.log(response.data);
+            dispatch(loginSuccess(response.data))
         } catch (error) {
-            
+            dispatch(loginFailure())
         }
          
     }

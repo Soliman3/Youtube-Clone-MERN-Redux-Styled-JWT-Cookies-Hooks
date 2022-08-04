@@ -13,6 +13,7 @@ import { Link } from 'react-router-dom';
 // import LogoImage from images folder...
 import logoImage from '../images/youtubeLogo.svg';
 import MenuIcon from '../images/MenuIcon.png';
+import { useSelector } from 'react-redux';
 
 // Styling...
 // Styled component for (div) for makeing the NavBar component...
@@ -99,6 +100,7 @@ const LoginButton = styled.button`
 
 // React functional component for NavBar...
 export default function TestNavBar({ MenuClicked, setMenuClicked }) {
+  const { currentUser } = useSelector((state) => state.user);
   return (
     <Container>
       <WrapperContainer>
@@ -114,12 +116,12 @@ export default function TestNavBar({ MenuClicked, setMenuClicked }) {
           <SearchInput placeholder='Search' />
           <SearchOutlinedIcon />
         </SearchContainer>
-        <Link to="signin" style={{ color: 'inherit', textDecoration: 'inherit' }}>
+        {currentUser? "user" : <Link to="signin" style={{ color: 'inherit', textDecoration: 'inherit' }}>
           <LoginButton>
             <AccountCircleOutlinedIcon />
             SIGN IN
           </LoginButton>
-        </Link>
+        </Link>}
       </WrapperContainer>
     </Container>
   )
