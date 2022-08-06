@@ -10,7 +10,7 @@ import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import VideoCallOutlinedIcon from '@mui/icons-material/VideoCallOutlined';
 
 // import Link to direct clicking on logo to home page route ('/')...
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 // import LogoImage from images folder...
 import logoImage from '../images/youtubeLogo.svg';
@@ -104,8 +104,8 @@ const LoginButton = styled.button`
 
 // Styled component for (img) for Channel Image...
 const AccountImage = styled.img`
-    width: 36px;
-    height:36px;
+    width: 32px;
+    height:32px;
     border-radius: 50%;
     background-color: gray;
     object-fit: cover;
@@ -133,15 +133,15 @@ const LogOut = styled.div`
 export default function TestNavBar({ MenuClicked, setMenuClicked }) {
   const { currentUser } = useSelector((state) => state.user);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
 
   const handleLogOut = (e) => {
-
     try {
-      dispatch(logout());
+      dispatch(logout()).then(navigate("/signin"));
     } catch (error) {
         dispatch(loginFailure())
     }
-     
 }
   return (
     <Container>
