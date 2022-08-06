@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 
 // import styled components library for styling our app...
 import styled from 'styled-components';
@@ -6,6 +7,7 @@ import styled from 'styled-components';
 // Imported material icons from mui5 library...
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
+import VideoCallOutlinedIcon from '@mui/icons-material/VideoCallOutlined';
 
 // import Link to direct clicking on logo to home page route ('/')...
 import { Link } from 'react-router-dom';
@@ -13,7 +15,8 @@ import { Link } from 'react-router-dom';
 // import LogoImage from images folder...
 import logoImage from '../images/youtubeLogo.svg';
 import MenuIcon from '../images/MenuIcon.png';
-import { useSelector } from 'react-redux';
+
+
 
 // Styling...
 // Styled component for (div) for makeing the NavBar component...
@@ -98,6 +101,23 @@ const LoginButton = styled.button`
     align-items: center;  
 `;
 
+// Styled component for (img) for Channel Image...
+const AccountImage = styled.img`
+    width: 36px;
+    height:36px;
+    border-radius: 50%;
+    background-color: gray;
+    object-fit: cover;
+`;
+
+const User = styled.div`
+  align-items: center;
+  display: flex;
+  gap: 10px;
+  font-weight: 500;
+  color: ${({theme})=> theme.AllText};
+`
+
 // React functional component for NavBar...
 export default function TestNavBar({ MenuClicked, setMenuClicked }) {
   const { currentUser } = useSelector((state) => state.user);
@@ -116,7 +136,12 @@ export default function TestNavBar({ MenuClicked, setMenuClicked }) {
           <SearchInput placeholder='Search' />
           <SearchOutlinedIcon />
         </SearchContainer>
-        {currentUser? "user" : <Link to="signin" style={{ color: 'inherit', textDecoration: 'inherit' }}>
+        {currentUser ? (
+          <User>
+            <VideoCallOutlinedIcon />
+            <AccountImage />
+            {currentUser.name}
+          </User>) : <Link to="signin" style={{ color: 'inherit', textDecoration: 'inherit' }}>
           <LoginButton>
             <AccountCircleOutlinedIcon />
             SIGN IN

@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 // import styled components library for styling our app...
 import styled from 'styled-components';
 
@@ -126,6 +127,7 @@ const DesignedIcons = styled.img`
 
 // React functional component for Menu (left side component of the main page)...
 export default function Menu() {
+    const { currentUser } = useSelector((state) => state.user);
     return (
         <Container>
             <Link to="/" style={{ color: 'inherit', textDecoration: 'inherit' }}>
@@ -156,6 +158,7 @@ export default function Menu() {
                 History
             </Line>
             <HorizontalLine />
+            {!currentUser && <>
             <StyledLogin>
                 Sign in to like videos, comment and subscribe
                 <Link to="signin" style={{ color: 'inherit', textDecoration: 'inherit' }}>
@@ -167,6 +170,8 @@ export default function Menu() {
 
             </StyledLogin>
             <HorizontalLine />
+            </>
+            }
             <BestVideos>
                 BEST OF VIDEOS
             </BestVideos>
