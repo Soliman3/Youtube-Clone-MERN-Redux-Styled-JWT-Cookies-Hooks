@@ -1,5 +1,5 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { logout, loginFailure } from '../redux/useSlice';
 
 // import styled components library for styling our app...
 import styled from 'styled-components';
@@ -15,6 +15,7 @@ import { Link } from 'react-router-dom';
 // import LogoImage from images folder...
 import logoImage from '../images/youtubeLogo.svg';
 import MenuIcon from '../images/MenuIcon.png';
+
 
 
 
@@ -108,6 +109,7 @@ const AccountImage = styled.img`
     border-radius: 50%;
     background-color: gray;
     object-fit: cover;
+    cursor: pointer;
 `;
 
 const User = styled.div`
@@ -115,12 +117,32 @@ const User = styled.div`
   display: flex;
   gap: 10px;
   font-weight: 500;
-  color: ${({theme})=> theme.AllText};
-`
+  color: ${({ theme }) => theme.AllText};
+`;
+const LogOut = styled.div`
+  align-items: center;
+  display: flex;
+  gap: 10px;
+  font-weight: 200;
+  color: ${({ theme }) => theme.AllText};
+  font-size: 14px;
+  cursor: pointer;
+`;
 
 // React functional component for NavBar...
 export default function TestNavBar({ MenuClicked, setMenuClicked }) {
   const { currentUser } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+
+  const handleLogOut = (e) => {
+
+    try {
+      dispatch(logout());
+    } catch (error) {
+        dispatch(loginFailure())
+    }
+     
+}
   return (
     <Container>
       <WrapperContainer>
@@ -138,8 +160,9 @@ export default function TestNavBar({ MenuClicked, setMenuClicked }) {
         </SearchContainer>
         {currentUser ? (
           <User>
+            {currentUser? <LogOut onClick={handleLogOut}>Log Out</LogOut>: ''}
             <VideoCallOutlinedIcon />
-            <AccountImage />
+            <AccountImage src={currentUser.img}/>
             {currentUser.name}
           </User>) : <Link to="signin" style={{ color: 'inherit', textDecoration: 'inherit' }}>
           <LoginButton>

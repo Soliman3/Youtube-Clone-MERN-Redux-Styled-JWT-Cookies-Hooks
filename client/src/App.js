@@ -16,6 +16,7 @@ import Login from "./pages/Login";
 // import Global theme...
 import { lightTheme } from "./utils/Theme";
 import GlobalStyles from "./utils/Global";
+import { useSelector } from "react-redux";
 // Styling...
 
 // Styled component for Main (div)...
@@ -46,7 +47,7 @@ const WrapContainer = styled.div`
 
 // React functional component for App as the main body of the application...
 function App() {
-
+  const { currentUser } = useSelector((state) => state.user);
   const [MenuClicked, setMenuClicked] = useState(false);
 
   return (
@@ -65,7 +66,7 @@ function App() {
                     <Route index element={<Home type="random"/>} />
                     <Route path="trends" element={<Home type="trend"/>} />
                     <Route path="subscriptions" element={<Home type="sub"/>} />
-                    <Route path="signin" element={<Login/>}/>
+                    <Route path="signin" element={!currentUser? <Login/>: <Home type="random"/>}/>
                     <Route path="video">
                       <Route path=":id" element={<Video />} />
                     </Route>

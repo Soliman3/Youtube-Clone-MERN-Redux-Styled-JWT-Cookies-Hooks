@@ -1,6 +1,10 @@
 import React, { useLayoutEffect, useState } from 'react';
 import SignUp from '../components/SignUp';
 import { useDispatch } from 'react-redux';
+// google auth..
+import { auth, provider } from "../firebase";
+// google sign in with google Popup...
+import { signInWithPopup } from 'firebase/auth';
 
 // import styled components library for styling our app...
 import styled from 'styled-components';
@@ -41,8 +45,9 @@ const Input = styled.input`
 border: 1px solid ${({ theme }) => theme.SoftColor};
 border-radius: 3px;
 background-color: transparent;
-width:100%;
+width: 90%;
 padding: 10px;
+margin: 10px;
 `;
 
 const Button = styled.button`
@@ -76,7 +81,7 @@ const HyperLink = styled.span`
 const WrapperButton = styled.div`
 display: flex;
 align-items: center;
-gap: 150px;
+gap: 30px;
 `;
 const SignUpMessage = styled.span`
 font-size:13px;
@@ -108,6 +113,15 @@ export default function SignIn() {
     useLayoutEffect(() => {
         window.scrollTo(0, 0)
     });
+
+    // Google signin onClick async function...
+    const signInWithGoogle = async () => {
+        dispatch(loginStart())
+        signInWithPopup(auth, provider).then((result) => {
+            axios.post('/auth/google', { name: result.user.displayName, email: result.user.email, img: result.user.photoURL })
+                .then((response) => { dispatch(loginSuccess(response.data)) })
+         }).catch((error) => { dispatch(loginFailure(error))});
+    }
     return (
         <Container>
             {register ? <SignUp setRegister={setRegister} /> : <><WrapperContainer>
@@ -119,9 +133,12 @@ export default function SignIn() {
                 </form>
                 <WrapperButton>
                     <Button onClick={handleSignIn}>Sign In</Button>
+                    <Button onClick={signInWithGoogle}>Google Sign In</Button>
                     <SignUpMessage onClick={() => setRegister(true)}>Create new account</SignUpMessage>
                 </WrapperButton>
-
+                <WrapperButton>
+                    
+                </WrapperButton>
             </WrapperContainer>
             </>}
             <More>
