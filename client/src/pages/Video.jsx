@@ -1,4 +1,4 @@
-import React, { useLayoutEffect } from 'react';
+import React, { useEffect, useLayoutEffect, useState } from 'react';
 // import styled components library for styling our app...
 import styled from 'styled-components';
 
@@ -16,6 +16,11 @@ import ChannelImage from '../images/AccountImage.jpg';
 // import Comments component...
 import Comments from '../components/Comments';
 import VideoCard from '../components/VideoCard';
+import { useDispatch, useSelector } from 'react-redux';
+import { useLocation } from 'react-router-dom';
+import axios from 'axios';
+import { fetchingFailure, fetchingStart, fetchingSuccess } from '../redux/videoSlice';
+import moment from 'moment';
 
 // Styling...
 const Container = styled.div`
@@ -118,6 +123,30 @@ const VideoDiscription = styled.p`
   font-size: 14px;
 `
 export default function Video() {
+  const { currentUser } = useSelector((state) => state.user);
+  const { currentVideo } = useSelector((state) => state.video);
+  const dispatch = useDispatch();
+  const path = useLocation().pathname.split("/")[2]
+  const [channel, setChannel] = useState({});
+  
+
+  useEffect(() => {
+    const fetchingData = async () => {
+      dispatch(fetchingStart())
+      try {
+        const videoResponse = await axios.get(`/videos/find/${path}`);
+        const channelResponse = await axios.get(`/users/find/${videoResponse.data.userId}`);
+        
+        setChannel(channelResponse.data)
+        
+        dispatch(fetchingSuccess(videoResponse.data))
+      } catch (error) {
+        dispatch(fetchingFailure())
+      }
+    }
+    fetchingData()
+  }, [path, dispatch]);
+
   useLayoutEffect(() => {
     window.scrollTo(0, 0)
   });
@@ -127,13 +156,13 @@ export default function Video() {
         <VideoContentWrapper>
           <iframe width="100%" height="450px" src="https://www.youtube.com/embed/a8ICi5_buJQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </VideoContentWrapper>
-        <VideoName>My Husky WON’T Get Out Of Bed Until He Gets This!</VideoName>
+        <VideoName>{currentVideo.title}</VideoName>
         <VideoDetails>
-          <VideoInfo>67,127 views • Jul 27, 2022</VideoInfo>
+          <VideoInfo>{currentVideo.views} views • {moment(currentVideo.createdAt).fromNow()}</VideoInfo>
           <VideoButtons>
             <VideoActionButton>
               <ThumbUpOutlinedIcon />
-              5.8 K
+              {currentVideo.likes?.length}
             </VideoActionButton>
             <VideoActionButton>
               <ThumbDownOutlinedIcon />
@@ -159,21 +188,16 @@ export default function Video() {
         <HorizontalLine />
         <VideoChannel>
           <VideoChannelInfo>
-            <AccountImage src={ChannelImage} />
+            <AccountImage src={channel.img} />
             <AccountDetails>
               <AccountNameWrapper>
-                <AccountName>K'eyush The Stunt Dog</AccountName>
+                <AccountName>{channel.name}</AccountName>
 
                 <CheckCircleIcon style={{ color: '#626163', fontSize: '14px' }} />
 
               </AccountNameWrapper>
-              <AccountInfo>2.1M subscribers</AccountInfo>
-              <VideoDiscription>Key is NOT a morning person, he will not get out of bed until he gets this...
-                Teespring Merchandise: teespring.com/stores/keyush-the-stunt...
-                Merchandise sold by us directly: https://designedbyboo.com/product-cat...
-                If you would like to support Key and our channel: https://www.paypal.com/paypalme/Booan...
-                If you would like to send Key a gift he has an amazon wish list: http://amzn.eu/9Q7QVjx
-                Consider becoming a member to support your favourite fluffy boy: </VideoDiscription>
+              <AccountInfo>{channel.subscribers} subscribers</AccountInfo>
+              <VideoDiscription>{currentVideo.description}</VideoDiscription>
             </AccountDetails>
           </VideoChannelInfo>
           <SubscribeButton>SUBSCRIBE</SubscribeButton>
@@ -181,23 +205,7 @@ export default function Video() {
         <HorizontalLine />
         <Comments />
       </VideoContent>
-      <Recommendations>
-        <VideoCard type='sm' />
-        <VideoCard type='sm' />
-        <VideoCard type='sm' />
-        <VideoCard type='sm' />
-        <VideoCard type='sm' />
-        <VideoCard type='sm' />
-        <VideoCard type='sm' />
-        <VideoCard type='sm' />
-        <VideoCard type='sm' />
-        <VideoCard type='sm' />
-        <VideoCard type='sm' />
-        <VideoCard type='sm' />
-        <VideoCard type='sm' />
-        <VideoCard type='sm' />
-        <VideoCard type='sm' />
-      </Recommendations>
+        
     </Container>
   )
 }

@@ -21,7 +21,7 @@ const persistConfig = {
   storage,
 }
 
-const rootReducer = combineReducers({ video: videoReducer, user: userReducer })
+const rootReducer = combineReducers({ user:userReducer, video:videoReducer })
 const persistedReducer = persistReducer(persistConfig, rootReducer)
 export const store = configureStore({
   reducer: persistedReducer,
@@ -31,7 +31,7 @@ export const store = configureStore({
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
     }),
-})
+});
 
 
 export const persistor = persistStore(store)

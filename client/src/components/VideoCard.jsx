@@ -82,7 +82,7 @@ export default function VideoCard({ type, video }) {
 
 
     return (
-        <Link to="/video/123" style={{color: 'inherit', textDecoration: 'inherit'}}>
+        <Link to={`/video/${video._id}`} style={{color: 'inherit', textDecoration: 'inherit'}}>
             <Container type={type} >
                 <VideoImage src={video.imgUrl} type={type}/>
                 <VideoDetails type={type}>
