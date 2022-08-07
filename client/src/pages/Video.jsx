@@ -4,22 +4,22 @@ import styled from 'styled-components';
 
 // Imported material icons from mui5 library...
 import ThumbUpOutlinedIcon from '@mui/icons-material/ThumbUpOutlined';
+import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import ThumbDownOutlinedIcon from '@mui/icons-material/ThumbDownOutlined';
+import ThumbDownIcon from '@mui/icons-material/ThumbDown';
 import ReplyOutlinedIcon from '@mui/icons-material/ReplyOutlined';
 import ContentCutOutlinedIcon from '@mui/icons-material/ContentCutOutlined';
 import PlaylistAddOutlinedIcon from '@mui/icons-material/PlaylistAddOutlined';
 import MoreHorizOutlinedIcon from '@mui/icons-material/MoreHorizOutlined';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 
-// import ChannelImage from images folder...
-import ChannelImage from '../images/AccountImage.jpg';
+
 // import Comments component...
 import Comments from '../components/Comments';
-import VideoCard from '../components/VideoCard';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import axios from 'axios';
-import { fetchingFailure, fetchingStart, fetchingSuccess } from '../redux/videoSlice';
+import { fetchingDislikes, fetchingFailure, fetchingLikes, fetchingStart, fetchingSuccess } from '../redux/videoSlice';
 import moment from 'moment';
 
 // Styling...
@@ -147,6 +147,16 @@ export default function Video() {
     fetchingData()
   }, [path, dispatch]);
 
+  const handleLike = async () => {
+    await axios.put(`/users/like/${currentVideo._id}`)
+    dispatch(fetchingLikes(currentUser._id))
+  }
+
+  const handleDislike = async () => {
+    await axios.put(`/users/dislike/${currentVideo._id}`)
+    dispatch(fetchingDislikes(currentUser._id))
+  }
+
   useLayoutEffect(() => {
     window.scrollTo(0, 0)
   });
@@ -160,12 +170,12 @@ export default function Video() {
         <VideoDetails>
           <VideoInfo>{currentVideo.views} views • {moment(currentVideo.createdAt).fromNow()}</VideoInfo>
           <VideoButtons>
-            <VideoActionButton>
-              <ThumbUpOutlinedIcon />
+            <VideoActionButton onClick={handleLike}>
+              {currentVideo.likes?.includes(currentUser._id)? <ThumbUpIcon/> : <ThumbUpOutlinedIcon />}
               {currentVideo.likes?.length}
             </VideoActionButton>
-            <VideoActionButton>
-              <ThumbDownOutlinedIcon />
+            <VideoActionButton onClick={handleDislike}>
+              {currentVideo.dislikes?.includes(currentUser._id)? <ThumbDownIcon/> : <ThumbDownOutlinedIcon />}
               DISLIKE
             </VideoActionButton>
             <VideoActionButton>
