@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 // import styled components library for styling our app...
 import styled from 'styled-components';
 
@@ -8,6 +8,8 @@ import ThumbDownOutlinedIcon from '@mui/icons-material/ThumbDownOutlined';
 
 // import OtherImage from images folder...
 import InteractiveAccountImages from '../images/InteractiveAcountImage.jpg';
+import axios from 'axios';
+import moment from 'moment';
 
 // Styling...
 const Container = styled.div`
@@ -74,16 +76,30 @@ const ReplayAction = styled.span`
     color: ${({ theme }) => theme.SoftText};
     cursor: pointer;
 `
-export default function Comment() {
+export default function Comment({ comment }) {
+    const [channel, setChannel] = useState({});
+
+    useEffect(() => {
+        const fetchingComment = async () => {
+            try {
+                const responseComment = await axios.get(`/users/find/${comment.userId}`)
+                setChannel(responseComment.data)
+            
+            } catch (error) {
+                
+            }
+        }
+        fetchingComment();
+    },[comment.userId])
     return (
         <Container>
-            <OtherAccountImage src={InteractiveAccountImages} />
+            <OtherAccountImage src={channel.img} />
             <OtherAccountDetails>
                 <AccountNameContainer>
-                    <OtherAccountName>Hope</OtherAccountName>
-                    <CommentTimeAgo>1 day ago</CommentTimeAgo>
+                    <OtherAccountName>{channel.name}</OtherAccountName>
+                    <CommentTimeAgo>{moment(comment.createdAt).fromNow()}</CommentTimeAgo>
                 </AccountNameContainer>
-                <CommentText>Key is so adorable, irresistible, cute, sweet, beautiful and more!😁 He 100% + deserves belly rubs😁 Thanks Key, Jodie and Nan for much needed smiles </CommentText>
+                <CommentText>{comment.description} </CommentText>
                 <InteractionWithComment>
                     <OthersCommentButtons>
                         <ActionButton>

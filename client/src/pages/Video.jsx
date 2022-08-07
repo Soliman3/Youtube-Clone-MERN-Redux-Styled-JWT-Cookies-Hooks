@@ -21,6 +21,7 @@ import { useLocation } from 'react-router-dom';
 import axios from 'axios';
 import { fetchingDislikes, fetchingFailure, fetchingLikes, fetchingStart, fetchingSuccess } from '../redux/videoSlice';
 import moment from 'moment';
+import { subscription } from '../redux/useSlice';
 
 // Styling...
 const Container = styled.div`
@@ -121,8 +122,18 @@ const AccountInfo = styled.span`
 const VideoDiscription = styled.p`
   margin-top: 20px;
   font-size: 14px;
-`
+`;
+
+const VideoIframe = styled.video`
+  width: 100%;
+  max-height: 700px;
+  object-fit: cover;
+`;
+
+
+// Video React Component...
 export default function Video() {
+  
   const { currentUser } = useSelector((state) => state.user);
   const { currentVideo } = useSelector((state) => state.video);
   const dispatch = useDispatch();
@@ -157,14 +168,21 @@ export default function Video() {
     dispatch(fetchingDislikes(currentUser._id))
   }
 
-  useLayoutEffect(() => {
-    window.scrollTo(0, 0)
-  });
+  // handle subscription button onClick action...
+  const handleSubscribe = async () => {
+    currentUser.subscribedChannels.includes(channel._id)
+      ? await axios.put(`/users/unsub/${channel._id}`)
+      : await axios.put(`/users/sub/${channel._id}`);
+    dispatch(subscription(channel._id));
+  };
+
+
+ 
   return (
     <Container>
       <VideoContent>
         <VideoContentWrapper>
-          <iframe width="100%" height="450px" src="https://www.youtube.com/embed/a8ICi5_buJQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          <VideoIframe src={currentVideo.videoUrl} />
         </VideoContentWrapper>
         <VideoName>{currentVideo.title}</VideoName>
         <VideoDetails>
@@ -210,10 +228,10 @@ export default function Video() {
               <VideoDiscription>{currentVideo.description}</VideoDiscription>
             </AccountDetails>
           </VideoChannelInfo>
-          <SubscribeButton>SUBSCRIBE</SubscribeButton>
+          <SubscribeButton onClick={handleSubscribe}>{currentUser.subscribedChannels.includes(channel._id)? 'SUBSCRIBED': 'SUBSCRIBE'}</SubscribeButton>
         </VideoChannel>
         <HorizontalLine />
-        <Comments />
+        <Comments videoId={currentVideo._id} />
       </VideoContent>
         
     </Container>

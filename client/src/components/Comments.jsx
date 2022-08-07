@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 // import styled components library for styling our app...
 import styled from 'styled-components';
 
@@ -10,6 +10,9 @@ import Comment from './Comment';
 
 // Imported material icons from mui5 library...
 import SentimentSatisfiedAltIcon from '@mui/icons-material/SentimentSatisfiedAlt';
+import { updateCurrentUser } from 'firebase/auth';
+import { useSelector } from 'react-redux';
+import axios from 'axios';
 
 const Container = styled.div`
 
@@ -69,17 +72,33 @@ const CommentCreate = styled.button`
     border-radius: 2px;
     cursor: pointer;
 `
-export default function Comments() {
+export default function Comments({videoId}) {
     const [isClicked, setIsClicked] = useState(false);
     const [value, setValue] = useState("");
     function handleOnClick() {
         setIsClicked(false);
         setValue("");
     };
+
+    const { currentUser } = useSelector((state) => state.user);
+    const [comments, setComments] = useState([]);
+    useEffect(() => {
+        const fetchComments = async () => {
+            
+            try {
+                const responseComments = await axios.get(`/comments/${videoId}`)
+                setComments(responseComments.data)
+            } catch (error) {
+                
+            }
+        }
+        fetchComments()
+        
+    }, [videoId])
     return (
         <Container>
             <NewComment>
-                <AccountImage src={ChannelImage} />
+                <AccountImage src={currentUser.img} />
                 <Wrapper>
 
                     <CommentInput placeholder='Add a comment' onClick={() => setIsClicked(true)} value={value} onChange={e => setValue(e.target.value)} />
@@ -93,12 +112,10 @@ export default function Comments() {
 
                 </Wrapper>
             </NewComment>
-
-            <Comment />
-            <Comment />
-            <Comment />
-            <Comment />
-            <Comment />
+            {comments.map((comment) => (
+                <Comment comment={comment} key={comment._id} />
+            ))}
+            
 
         </Container>
     )
