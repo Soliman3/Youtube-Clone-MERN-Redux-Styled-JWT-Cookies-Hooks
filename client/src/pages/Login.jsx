@@ -12,26 +12,36 @@ import axios from 'axios';
 import { loginFailure, loginStart, loginSuccess } from '../redux/useSlice';
 import { useNavigate } from 'react-router-dom';
 
+// import icons from mui5 library...
+import CloseIcon from '@mui/icons-material/Close';
 
-// Styling by Styled Component Library...
+
+
+
+// Styling...
 const Container = styled.div`
 display: flex;
 align-items: center;
 justify-content: center;
-height: calc(100vh - 55px);
+
 color: ${({ theme }) => theme.AllText};
 flex-direction: column;
+width: 100%;
+    height: 100%;
+    top:0;
+    left:0;
+    background-color: rgba(0, 0, 0, 0.50);
+    position: absolute;
+    z-index: 8;
 `;
 const WrapperContainer = styled.div`
 background-color: ${({ theme }) => theme.LighterBackground};
 padding: 20px 40px;
 border: 1px solid ${({ theme }) => theme.SoftColor};
-border-radius: 20px;
-box-shadow: 0px 5px 5px 0px rgba(0,41,158,0.3);
-
--webkit-box-shadow: 0px 5px 5px 0px rgba(0,41,158,0.3);
-
--moz-box-shadow: 0px 5px 5px 0px rgba(0,41,158,0.3);
+border-radius: 6px;
+box-shadow: 0px 13px 36px -15px rgba(117,112,112,0.62);
+    -webkit-box-shadow: 0px 13px 36px -15px rgba(117,112,112,0.62);
+    -moz-box-shadow: 0px 13px 36px -15px rgba(117,112,112,0.62);
 `;
 const Wrapper = styled.div`
     
@@ -84,9 +94,9 @@ const InputForm = styled.form`
 `
 
 const Button = styled.button`
-background-color: hsla(220, 100%, 50%, 80%);
+background-color: #065fd4;
 color: white;
-border-radius: 6px;
+border-radius: 2px;
 padding: 10px 20px;
 font-weight: 500;
 font-size:16px;
@@ -120,8 +130,15 @@ margin-top: 15px;
 `;
 const SignUpMessage = styled.span`
 font-size:13px;
-color: hsla(220, 100%, 50%, 80%);
+color: #065fd4;
 `;
+
+const TopWrapper = styled.div`
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-right: -20px;
+`
 
 
 // React functional component for Login Page...
@@ -156,12 +173,20 @@ export default function SignIn() {
         signInWithPopup(auth, provider).then((result) => {
             axios.post('/auth/google', { name: result.user.displayName, email: result.user.email, img: result.user.photoURL })
                 .then((response) => { dispatch(loginSuccess(response.data)) }).then(navigate("/"))
-         }).catch((error) => { dispatch(loginFailure(error))});
+        }).catch((error) => { dispatch(loginFailure(error)) });
+    }
+
+    // handle close login page
+    const handleClose = () => {
+        navigate("/")
     }
     return (
         <Container>
-            {register ? <SignUp setRegister={setRegister} /> : <><WrapperContainer><Wrapper>
+            {register ? <SignUp setRegister={setRegister} /> : <> <WrapperContainer> <Wrapper>
+                <TopWrapper>
                 <Title>Sign In</Title>
+                <CloseIcon style={{top:'0', right: '0', cursor: 'pointer'}} onClick={handleClose} />
+                </TopWrapper>
                 <SubTitle>to continue to Video Clone</SubTitle>
                 <InputForm>
                 <Input placeholder='User name' onChange={(e)=>setName(e.target.value)}/>

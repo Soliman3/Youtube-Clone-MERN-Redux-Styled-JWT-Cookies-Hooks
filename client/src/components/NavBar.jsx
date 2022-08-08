@@ -15,6 +15,10 @@ import { Link, useNavigate } from 'react-router-dom';
 // import LogoImage from images folder...
 import logoImage from '../images/youtubeLogo.svg';
 import MenuIcon from '../images/MenuIcon.png';
+import { useState } from 'react';
+
+// import required components...
+import Upload from './Upload';
 
 
 
@@ -131,11 +135,15 @@ const LogOut = styled.div`
 
 // React functional component for NavBar...
 export default function TestNavBar({ MenuClicked, setMenuClicked }) {
+  // useState for PopUp add new vieeo...
+  const [open, setOpen] = useState(false)
+
+  // useSelector for userSlice...
   const { currentUser } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-
+  // handle Log Out function...
   const handleLogOut = (e) => {
     try {
       dispatch(logout()).then(navigate("/signin"));
@@ -144,6 +152,7 @@ export default function TestNavBar({ MenuClicked, setMenuClicked }) {
     }
 }
   return (
+    <>
     <Container>
       <WrapperContainer>
         <LogoContainer />
@@ -161,7 +170,7 @@ export default function TestNavBar({ MenuClicked, setMenuClicked }) {
         {currentUser ? (
           <User>
             {currentUser? <LogOut onClick={handleLogOut}>Log Out</LogOut>: ''}
-            <VideoCallOutlinedIcon />
+            <VideoCallOutlinedIcon onClick={()=>setOpen(true)} />
             <AccountImage src={currentUser.img}/>
             {currentUser.name}
           </User>) : <Link to="signin" style={{ color: 'inherit', textDecoration: 'inherit' }}>
@@ -171,6 +180,8 @@ export default function TestNavBar({ MenuClicked, setMenuClicked }) {
           </LoginButton>
         </Link>}
       </WrapperContainer>
-    </Container>
+      </Container>
+      {open && <Upload setOpen={setOpen} />}
+    </>
   )
 }

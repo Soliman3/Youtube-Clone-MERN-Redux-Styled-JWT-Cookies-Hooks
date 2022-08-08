@@ -2,9 +2,25 @@ import React from 'react';
 // import styled components library for styling our app...
 import styled from 'styled-components';
 
-import CancelPresentationIcon from '@mui/icons-material/CancelPresentation';
+// import icons from mui5 library...
+import CloseIcon from '@mui/icons-material/Close';
 
 // Styling by Styled Component Library...
+const Contatiner = styled.div`
+display: flex;
+align-items: center;
+justify-content: center;
+
+color: ${({ theme }) => theme.AllText};
+flex-direction: column;
+width: 100%;
+    height: 100%;
+    top:0;
+    left:0;
+    background-color: transparent;
+    position: fixed;
+    z-index: 8;
+`
 const WrapperContainer = styled.div`
 display: flex;
 align-items: center;
@@ -14,29 +30,27 @@ flex-direction: column;
 padding: 20px 50px;
 border: 1px solid ${({ theme }) => theme.SoftColor};
 gap:10px;
-width: inherit;
-border-radius: 20px;
-box-shadow: 0px 5px 5px 0px rgba(0,41,158,0.3);
-
--webkit-box-shadow: 0px 5px 5px 0px rgba(0,41,158,0.3);
-
--moz-box-shadow: 0px 5px 5px 0px rgba(0,41,158,0.3);
-`
+width: auto;
+border-radius: 6px;
+box-shadow: 0px 13px 36px -15px rgba(117,112,112,0.62);
+    -webkit-box-shadow: 0px 13px 36px -15px rgba(117,112,112,0.62);
+    -moz-box-shadow: 0px 13px 36px -15px rgba(117,112,112,0.62);
+`;
 const Title = styled.h1`
 font-size: 25px;
 
-`
+`;
 const SubTitle = styled.h2`
 font-size: 25px;
 font-weight: 300;
-`
+`;
 const Text = styled.div`
 display: flex;
 flex-direction: row;
 align-items: center;
 justify-content: center;
 gap: 6px;
-`
+`;
 const Input = styled.input`
 border: 1px solid ${({ theme }) => theme.SoftColor};
 background-color: transparent;
@@ -72,9 +86,9 @@ const InputForm = styled.form`
 `;
 
 const Button = styled.button`
-background-color: hsla(220, 100%, 50%, 80%);
+background-color: #065fd4;
 color: white;
-border-radius: 6px;
+border-radius: 2px;
 padding: 10px 20px;
 font-weight: 500;
 font-size:16px;
@@ -82,22 +96,23 @@ border: none;
 cursor: pointer;
 align-items: left;
 width: 100%;
-`
+`;
 const WrapperButton = styled.div`
 display: flex;
 align-items: center;
 justify-content: center;
-`
+`;
 const BackToSignIn = styled.span`
 font-size:13px;
 color: #CC0000;
 margin-top: 10px;
 display: flex;
 align-items: center;
-gap: 10px;
-`
+gap: 5px;
+`;
 export default function SignIn({setRegister}) {
     return (
+        <Contatiner>
         <WrapperContainer>
             <Text>
                 <Title>Sign Up</Title>
@@ -112,10 +127,11 @@ export default function SignIn({setRegister}) {
             <Button>Sign Up</Button>
             <BackToSignIn onClick={() => setRegister(false)}>
                 
-                <CancelPresentationIcon style={{opacity: '80%'}} />
+                <CloseIcon style={{opacity: '80%', fontSize: '16px'}} />
                 No, I have an account
             </BackToSignIn>
             <WrapperButton />
-        </WrapperContainer>
+            </WrapperContainer>
+            </Contatiner>
     )
 }

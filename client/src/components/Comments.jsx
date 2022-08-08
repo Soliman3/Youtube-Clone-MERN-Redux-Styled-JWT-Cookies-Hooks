@@ -80,11 +80,11 @@ export default function Comments({videoId}) {
         setValue("");
     };
 
+    // fetching video comments from mongo
     const { currentUser } = useSelector((state) => state.user);
     const [comments, setComments] = useState([]);
     useEffect(() => {
         const fetchComments = async () => {
-            
             try {
                 const responseComments = await axios.get(`/comments/${videoId}`)
                 setComments(responseComments.data)
