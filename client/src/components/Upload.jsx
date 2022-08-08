@@ -8,6 +8,8 @@ import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/
 import CloseIcon from '@mui/icons-material/Close';
 import FileUploadIcon from '@mui/icons-material/FileUpload';
 import app from '../firebase';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 
 const Container = styled.div`
@@ -206,6 +208,8 @@ export default function Upload({ setOpen }) {
     const [inputs, setInputs] = useState({});
     const [tags, setTags] = useState([]);
 
+    const navigate = useNavigate()
+
     const handleChange = (e) => {
         setInputs((previous) => {
             return { ...previous, [e.target.name]: e.target.value };
@@ -230,7 +234,7 @@ export default function Upload({ setOpen }) {
             (snapshot) => {
 
                 const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-                urlType === 'imgUrl' ? setImgProgress(progress) : setVideoProgress(progress);
+                urlType === 'imgUrl' ? setImgProgress(Math.round(progress)) : setVideoProgress(Math.round(progress));
                 switch (snapshot.state) {
                     case 'paused':
                         console.log('Upload is paused');
@@ -256,8 +260,18 @@ export default function Upload({ setOpen }) {
         );
     }
 
-    useEffect(() => { video && uploadFile(video , "videoUrl") }, [video])
-    useEffect(() => { img && uploadFile(img, "imgUrl") }, [img])
+    // useEffect hook to render uploadFile firebase function...
+    useEffect(() => { video && uploadFile(video, "videoUrl") }, [video]);
+    useEffect(() => { img && uploadFile(img, "imgUrl") }, [img]);
+    
+    // upload files to mongo...
+    const handleUpload = async (e) => {
+        e.preventDefault()
+        const response = await axios.post(`/videos`, { ...inputs, tags });
+        setOpen(false);
+
+        response.status===200 && navigate(`/video/${response.data._id}`)
+    }
     return (
         <Container>
             <Wrapper>
@@ -273,9 +287,11 @@ export default function Upload({ setOpen }) {
                     </Circle>
                     <SelectedFileText>Drag and drop video files to upload</SelectedFileText>
                     <SelectedFileDetails>Your videos will be private until you publish them.</SelectedFileDetails>
-                    {videoProgress>0? ("Uploading Video:" + videoProgress + "%"):(<Button onClick={() => setIsClicked(true)}>SELECTED FILES
+
+                    {videoProgress>0? ("Uploading progress:" + videoProgress + "%") : (<Button onClick={() => setIsClicked(true)}>SELECTED FILES
                         <input type="file" style={{ display: 'none' }} accept="video/*" onChange={(e) => setVideo(e.target.files[0])} />
                     </Button>)}
+
                 </UploadFileIcon>
                 {isClicked && <VideoDetailsWrapper>
                     <InputsContainer>
@@ -283,6 +299,7 @@ export default function Upload({ setOpen }) {
                         <Input type="text" placeholder='Video Description' onChange={handleChange} name="description"/>
                         <Input type="text" placeholder='Separate tags with commas' onChange={handleTags} />
                     </InputsContainer>
+
                     {imgProgress>0? ("Uploading Image:"+ imgProgress + "%"):(<UploadFileImage>
                         <Button type="">
                             SELECT IMAGE
@@ -290,9 +307,10 @@ export default function Upload({ setOpen }) {
                         </Button>
                     </UploadFileImage>)}
                     <SubmitFiles>
-                        <UploadButton>Upload All files</UploadButton>
+                        <UploadButton onClick={handleUpload}>Upload All files</UploadButton>
                     </SubmitFiles>
                 </VideoDetailsWrapper>}
+
                 {!isClicked && <> <FooterText>
                     By submitting your videos to Soliman YouTube Clone, you acknowledge that you agree to <span style={{ color: 'blue', marginLeft: "5px" }}>Terms of Service</span> and <span style={{ color: 'blue', marginLeft: "5px" }}>Community Guidelines</span>.
                 </FooterText>
