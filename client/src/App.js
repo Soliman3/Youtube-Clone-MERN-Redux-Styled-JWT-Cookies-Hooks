@@ -16,6 +16,7 @@ import Login from "./pages/Login";
 // import Global theme...
 import { lightTheme } from "./utils/Theme";
 import GlobalStyles from "./utils/Global";
+import SearchResults from "./pages/SearchResults";
 // Styling...
 
 // Styled component for Main (div)...
@@ -64,7 +65,8 @@ function App() {
                     <Route index element={<Home type="random"/>} />
                     <Route path="trends" element={<Home type="trend"/>} />
                     <Route path="subscriptions" element={<Home type="sub"/>} />
-                    <Route path="signin" element={<Login/>}/>
+                  <Route path="signin" element={<Login />} />
+                  <Route path="search" element={<SearchResults/>} />
                     <Route path="video">
                       <Route path=":id" element={<Video />} />
                     </Route>

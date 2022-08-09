@@ -137,7 +137,8 @@ const LogOut = styled.div`
 export default function TestNavBar({ MenuClicked, setMenuClicked }) {
   // useState for PopUp add new vieeo...
   const [open, setOpen] = useState(false)
-
+  // useState for Queries of SearchVideos...
+  const [query, setQuery] = useState("")
   // useSelector for userSlice...
   const { currentUser } = useSelector((state) => state.user);
   const dispatch = useDispatch();
@@ -164,8 +165,8 @@ export default function TestNavBar({ MenuClicked, setMenuClicked }) {
         </Link>
         <LogoContainer />
         <SearchContainer>
-          <SearchInput placeholder='Search' />
-          <SearchOutlinedIcon />
+          <SearchInput placeholder='Search' onChange={(e)=> setQuery(e.target.value)} />
+            <SearchOutlinedIcon style={{ cursor: "pointer" }} onClick={()=> navigate(`/search?q=${query}`)} />
         </SearchContainer>
         {currentUser ? (
           <User>
