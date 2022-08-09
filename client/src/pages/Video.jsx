@@ -22,6 +22,7 @@ import axios from 'axios';
 import { fetchingDislikes, fetchingFailure, fetchingLikes, fetchingStart, fetchingSuccess } from '../redux/videoSlice';
 import moment from 'moment';
 import { subscription } from '../redux/useSlice';
+import RecommendationVideo from '../components/RecommendationVideo';
 
 // Styling...
 const Container = styled.div`
@@ -233,7 +234,7 @@ export default function Video() {
         <HorizontalLine />
         <Comments videoId={currentVideo._id} />
       </VideoContent>
-        
+        <RecommendationVideo tags={currentVideo.tags}/>
     </Container>
   )
 }
