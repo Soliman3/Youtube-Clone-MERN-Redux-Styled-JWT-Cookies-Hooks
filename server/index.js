@@ -36,13 +36,17 @@ app.use('/api/auth', authRoutes);
 
    
 // middleware for hanndling errors...
-app.use((error, req, res, next)=> {
-    const status = error.status || 500;
-    const message = error.message || 'something wrong of the entry';
-    return res.status(status).json({success: false , status: status, message: message})
-})
+app.use((err, req, res, next) => {
+    const status = err.status || 500;
+    const message = err.message || "something wrong of the entry";
+    return res.status(status).json({
+        success: false,
+        status,
+        message,
+    });
+});
 // listening to server on PORT 5000 and connect to database with function CONNECTION...
-app.listen(5000, () => {
+app.listen(5001, () => {
     CONNECTION()
     console.log('connected to server port 5000') // all console logs will be removed in production stage...
 })

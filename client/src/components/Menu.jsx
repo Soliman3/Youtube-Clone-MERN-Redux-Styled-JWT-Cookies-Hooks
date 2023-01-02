@@ -34,16 +34,15 @@ const Container = styled.div`
     font-size: 14px;
     height: 100vh;
     top: 55px;
-    
+    bottom: 55px;
     position:sticky;
-    overflow-y:hidden;
+    overflow-y:scroll;
     overflow-x:hidden;
     z-index: 2;
     &:hover{
         overflow-y:scroll;
     };
     
-    }
     ::-webkit-scrollbar {
         width: 8px;
         height: 5px;
@@ -68,7 +67,7 @@ const Container = styled.div`
         
         }
     }
-`;
+`
 
 // Styled component for (div) to wrap the main content of the container and giving it a padding...
 
@@ -84,7 +83,7 @@ const Line = styled.div`
     
     &:hover{
         background-color: ${({ theme }) => theme.SoftColor};
-    };
+    }
 `;
 // Styled component (div) for login page (JWT)...
 const StyledLogin = styled.div`
@@ -101,7 +100,7 @@ const LoginButton = styled.button`
     margin-top: 5px;
     gap:4px;
     display: flex;
-    align-items: center   
+    align-items: center;  
 `;
 // Styled component (hr) for making breaks between main sections...
 const HorizontalLine = styled.hr`

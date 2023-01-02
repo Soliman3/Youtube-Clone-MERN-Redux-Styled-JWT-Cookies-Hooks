@@ -27,7 +27,7 @@ import RecommendationVideo from '../components/RecommendationVideo';
 // Styling...
 const Container = styled.div`
   display: flex;
-  gap:15px
+  gap:15px;
 `
 const VideoContent = styled.div`
   flex: 5;
@@ -61,7 +61,7 @@ const VideoButtons = styled.div`
 const VideoActionButton = styled.div`
   display: flex;
   align-items: center;
-  gap: 6px
+  gap: 6px;
 `
 const Recommendations = styled.div`
   flex: 2;
@@ -113,7 +113,7 @@ const AccountNameWrapper = styled.div`
 const AccountName = styled.h1`
   font-size: 15px;
   cursor: pointer;
-  font-weight: 500
+  font-weight: 500;
 `
 
 const AccountInfo = styled.span`

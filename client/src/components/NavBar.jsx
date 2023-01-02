@@ -27,7 +27,7 @@ import Upload from './Upload';
 // Styled component for (div) for makeing the NavBar component...
 const Container = styled.div`
     height: 55px;
-    position: fixed;
+    position: sticky;
     top: 0;
     background-color: ${({ theme }) => theme.LighterBackground};
     width: 100%;
@@ -142,6 +142,7 @@ export default function TestNavBar({ MenuClicked, setMenuClicked }) {
   // useSelector for userSlice...
   const { currentUser } = useSelector((state) => state.user);
   const dispatch = useDispatch();
+  // useNavigation from react router dom...
   const navigate = useNavigate();
 
   // handle Log Out function...

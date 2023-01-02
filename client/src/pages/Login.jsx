@@ -14,6 +14,7 @@ import { useNavigate } from 'react-router-dom';
 
 // import icons from mui5 library...
 import CloseIcon from '@mui/icons-material/Close';
+import axiosPublic from '../utils/axiosInstance';
 
 
 
@@ -152,7 +153,7 @@ export default function SignIn() {
         e.preventDefault()
         dispatch(loginStart())
         try {
-            const response = await axios.post("/auth/signin", { name, password })
+            const response = await axiosPublic.post("/auth/signin", { name, password })
             dispatch(loginSuccess(response.data)).then(navigate("/"))
         } catch (error) {
             dispatch(loginFailure())

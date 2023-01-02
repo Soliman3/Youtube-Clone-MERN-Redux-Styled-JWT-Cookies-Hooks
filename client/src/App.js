@@ -25,24 +25,14 @@ const Main = styled.div`
   background-color: ${({ theme }) => theme.hardBackground};
   color: ${({ theme }) => theme.AllText};
   margin-left: 0;
-  margin-top: 55px;
- 
-  
 `
 // Styled Component for (div) to styling main Container inside Main...
 const Container = styled.div`
   display:flex;
-  flex-direction: row;
-  
-
-  
-
 `
 // Styled component for (div) to wrapping Container...
 const WrapContainer = styled.div`
   padding: 28px 28px;
-
- 
 `
 
 // React functional component for App as the main body of the application...
